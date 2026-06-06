@@ -4,7 +4,7 @@ export default function ReportCard({
   color,
 }) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6">
+    <div className="bg-[#131C31] rounded-2xl shadow-sm p-6">
       <p className="text-slate-500 text-sm">
         {title}
       </p>

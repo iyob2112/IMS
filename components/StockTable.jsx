@@ -27,91 +27,92 @@ export default function StockTable() {
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm mt-6">
+    <div className="overflow-x-auto mt-6">
 
       {/* ================= DESKTOP TABLE ================= */}
-      <div className="hidden md:block overflow-x-auto">
+      <table className="w-full hidden md:table text-sm text-slate-300">
 
-        <table className="w-full">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="p-4 text-left">Product</th>
-              <th className="p-4 text-left">Supplier</th>
-              <th className="p-4 text-left">Quantity</th>
-              <th className="p-4 text-left">Purchase Price</th>
-              <th className="p-4 text-left">Date</th>
-              <th className="p-4 text-left">Actions</th>
+        <thead className="bg-[#1A2742] text-slate-300">
+          <tr>
+            <th className="p-4 text-left">Product</th>
+            <th className="p-4 text-left">Supplier</th>
+            <th className="p-4 text-left">Quantity</th>
+            <th className="p-4 text-left">Purchase Price</th>
+            <th className="p-4 text-left">Date</th>
+            <th className="p-4 text-left">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {stock.map((item) => (
+            <tr
+              key={item.id}
+              className="border-t border-slate-800 hover:bg-[#1A2742] transition"
+            >
+
+              <td className="p-4 font-medium text-white">
+                {item.product}
+              </td>
+
+              <td className="p-4 text-slate-400">
+                {item.supplier}
+              </td>
+
+              <td className="p-4 text-slate-300">
+                {item.qty}
+              </td>
+
+              <td className="p-4 text-slate-300">
+                {item.price}
+              </td>
+
+              <td className="p-4 text-slate-400">
+                {item.date}
+              </td>
+
+              <td className="p-4">
+                <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
+                  Delete
+                </button>
+              </td>
+
             </tr>
-          </thead>
+          ))}
+        </tbody>
 
-          <tbody>
-            {stock.map((item) => (
-              <tr key={item.id} className="border-t hover:bg-slate-50">
-
-                <td className="p-4 font-medium">
-                  {item.product}
-                </td>
-
-                <td className="p-4 text-slate-600">
-                  {item.supplier}
-                </td>
-
-                <td className="p-4">
-                  {item.qty}
-                </td>
-
-                <td className="p-4">
-                  {item.price}
-                </td>
-
-                <td className="p-4">
-                  {item.date}
-                </td>
-
-                <td className="p-4">
-                  <button className="bg-red-500 text-white px-3 py-1 rounded">
-                    Delete
-                  </button>
-                </td>
-
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-      </div>
+      </table>
 
       {/* ================= MOBILE CARDS ================= */}
-      <div className="md:hidden p-4 space-y-4">
+      <div className="md:hidden space-y-4 p-2">
 
         {stock.map((item) => (
           <div
             key={item.id}
-            className="border rounded-xl p-4 shadow-sm"
+            className="bg-[#1A2742] border border-slate-800 rounded-2xl p-4"
           >
 
-            <h2 className="font-bold text-lg">
+            <h2 className="font-bold text-white text-lg">
               {item.product}
             </h2>
 
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-slate-400 mt-1">
               Supplier: {item.supplier}
             </p>
 
-            <p className="text-sm">
+            <p className="text-sm text-slate-300">
               Quantity: {item.qty}
             </p>
 
-            <p className="text-sm">
+            <p className="text-sm text-slate-300">
               Price: {item.price}
             </p>
 
-            <p className="text-sm">
+            <p className="text-sm text-slate-400">
               Date: {item.date}
             </p>
 
             <div className="mt-4">
-              <button className="bg-red-500 text-white px-3 py-2 rounded w-full">
+              <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl w-full">
                 Delete
               </button>
             </div>

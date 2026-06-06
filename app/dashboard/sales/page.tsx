@@ -1,21 +1,33 @@
+"use client";
 
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
 import SalesForm from "@/components/SalesForm";
 import SalesTable from "@/components/SalesTable";
 
 export default function SalesPage() {
   return (
-    <div className="flex">
- 
+    <div className="min-h-screen bg-[#0B1120] text-white p-3">
 
-      <main className="flex-1 p-0 bg-slate-100 min-h-screen">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold">
+          Sales Management
+        </h1>
 
+        <p className="text-slate-400 mt-1">
+          Record sales and track transactions
+        </p>
+      </div>
 
+      {/* Form */}
+      <div className="mb-6">
         <SalesForm />
+      </div>
 
+      {/* Table */}
+      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-2 sm:p-6">
         <SalesTable />
-      </main>
+      </div>
+
     </div>
   );
 }

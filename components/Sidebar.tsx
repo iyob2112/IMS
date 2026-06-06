@@ -28,6 +28,8 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
     { name: "Stock In", path: "/dashboard/stock-in", icon: PackagePlus },
     { name: "Sales", path: "/dashboard/sales", icon: ShoppingCart },
     { name: "Reports", path: "/dashboard/reports", icon: FileText },
+
+      
   ];
 
   return (
@@ -73,7 +75,9 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
           );
         })}
       </nav>
-
+<button className="bg-red-500 text-white px-4 py-2 rounded-xl w-full">
+  Logout
+</button>
     </aside>
   );
 }

@@ -22,105 +22,99 @@ export default function ProductTable() {
       category: "Accessories",
       purchase: "$25",
       selling: "$40",
-      quantity: 45,
+      quantity: 8,
     },
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm">
+    <div className="overflow-x-auto">
 
-      {/* ================= DESKTOP TABLE ================= */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="w-full text-sm lg:text-base">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left p-4">Product</th>
-              <th className="text-left p-4">Category</th>
-              <th className="text-left p-4">Purchase</th>
-              <th className="text-left p-4">Selling</th>
-              <th className="text-left p-4">Quantity</th>
-              <th className="text-left p-4">Actions</th>
+      {/* Desktop Table */}
+      <table className="w-full hidden md:table text-sm text-slate-300">
+
+        <thead className="bg-[#1A2742] text-slate-300">
+          <tr>
+            <th className="p-4 text-left">Product</th>
+            <th className="p-4 text-left">Category</th>
+            <th className="p-4 text-left">Purchase</th>
+            <th className="p-4 text-left">Selling</th>
+            <th className="p-4 text-left">Qty</th>
+            <th className="p-4 text-left">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {products.map((p) => (
+            <tr
+              key={p.id}
+              className="border-t border-slate-800 hover:bg-[#1A2742]"
+            >
+              <td className="p-4 text-white font-medium">{p.name}</td>
+              <td className="p-4 text-slate-400">{p.category}</td>
+              <td className="p-4">{p.purchase}</td>
+              <td className="p-4">{p.selling}</td>
+
+              <td className="p-4">
+                <span
+                  className={`px-3 py-1 rounded-xl text-xs ${
+                    p.quantity > 20
+                      ? "bg-green-500/20 text-green-400"
+                      : "bg-red-500/20 text-red-400"
+                  }`}
+                >
+                  {p.quantity}
+                </span>
+              </td>
+
+              <td className="p-4">
+                <div className="flex gap-2">
+                  <button className="bg-indigo-600 px-3 py-1 rounded-lg text-white">
+                    Edit
+                  </button>
+                  <button className="bg-red-600 px-3 py-1 rounded-lg text-white">
+                    Delete
+                  </button>
+                </div>
+              </td>
             </tr>
-          </thead>
+          ))}
+        </tbody>
 
-          <tbody>
-            {products.map((product) => (
-              <tr
-                key={product.id}
-                className="border-t hover:bg-slate-50 transition"
-              >
-                <td className="p-4 font-medium">{product.name}</td>
-                <td className="p-4 text-slate-600">{product.category}</td>
-                <td className="p-4">{product.purchase}</td>
-                <td className="p-4">{product.selling}</td>
-                <td className="p-4">
-                  <span
-                    className={`px-2 py-1 rounded text-white text-sm ${
-                      product.quantity > 20
-                        ? "bg-green-500"
-                        : "bg-red-500"
-                    }`}
-                  >
-                    {product.quantity}
-                  </span>
-                </td>
+      </table>
 
-                <td className="p-4">
-                  <div className="flex gap-2">
-                    <button className="bg-blue-500 text-white px-3 py-1 rounded">
-                      Edit
-                    </button>
-                    <button className="bg-red-500 text-white px-3 py-1 rounded">
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* Mobile Cards */}
+      <div className="md:hidden space-y-4">
 
-      {/* ================= MOBILE CARDS ================= */}
-      <div className="md:hidden p-0 space-y-4">
-
-        {products.map((product) => (
+        {products.map((p) => (
           <div
-            key={product.id}
-            className="border rounded-xl p-4 shadow-sm bg-white"
+            key={p.id}
+            className="bg-[#1A2742] border border-slate-800 rounded-2xl p-4"
           >
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="font-bold">{product.name}</h2>
+            <div className="flex justify-between">
+              <h2 className="text-white font-bold">{p.name}</h2>
 
-              <span
-                className={`px-2 py-1 text-xs rounded text-white ${
-                  product.quantity > 20
-                    ? "bg-green-500"
-                    : "bg-red-500"
-                }`}
-              >
-                {product.quantity}
+              <span className="text-xs px-3 py-1 rounded-xl bg-red-500/20 text-red-400">
+                {p.quantity}
               </span>
             </div>
 
-            <p className="text-sm text-slate-600">
-              Category: {product.category}
+            <p className="text-slate-400 text-sm mt-2">
+              {p.category}
             </p>
 
-            <p className="text-sm">
-              Purchase: {product.purchase}
+            <p className="text-slate-300 text-sm">
+              Purchase: {p.purchase}
             </p>
 
-            <p className="text-sm">
-              Selling: {product.selling}
+            <p className="text-slate-300 text-sm">
+              Selling: {p.selling}
             </p>
 
             <div className="flex gap-2 mt-3">
-              <button className="bg-blue-500 text-white px-3 py-1 rounded w-full">
+              <button className="w-full bg-indigo-600 py-2 rounded-xl">
                 Edit
               </button>
-
-              <button className="bg-red-500 text-white px-3 py-1 rounded w-full">
+              <button className="w-full bg-red-600 py-2 rounded-xl">
                 Delete
               </button>
             </div>
@@ -128,6 +122,7 @@ export default function ProductTable() {
         ))}
 
       </div>
+
     </div>
   );
 }

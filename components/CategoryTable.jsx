@@ -21,82 +21,83 @@ export default function CategoryTable() {
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm">
+    <div className="overflow-x-auto">
 
       {/* ================= DESKTOP TABLE ================= */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="p-4 text-left">Category</th>
-              <th className="p-4 text-left">Description</th>
-              <th className="p-4 text-left">Created Date</th>
-              <th className="p-4 text-left">Actions</th>
+      <table className="w-full hidden md:table text-sm text-slate-300">
+
+        <thead className="bg-[#1A2742] text-slate-300">
+          <tr>
+            <th className="p-4 text-left">Category</th>
+            <th className="p-4 text-left">Description</th>
+            <th className="p-4 text-left">Created Date</th>
+            <th className="p-4 text-left">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {categories.map((cat) => (
+            <tr
+              key={cat.id}
+              className="border-t border-slate-800 hover:bg-[#1A2742] transition"
+            >
+              <td className="p-4 font-medium text-white">
+                {cat.name}
+              </td>
+
+              <td className="p-4 text-slate-400">
+                {cat.description}
+              </td>
+
+              <td className="p-4 text-slate-300">
+                {cat.date}
+              </td>
+
+              <td className="p-4">
+                <div className="flex gap-2">
+                  <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg">
+                    Edit
+                  </button>
+
+                  <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
+                    Delete
+                  </button>
+                </div>
+              </td>
             </tr>
-          </thead>
+          ))}
+        </tbody>
 
-          <tbody>
-            {categories.map((cat) => (
-              <tr key={cat.id} className="border-t hover:bg-slate-50 transition">
-
-                <td className="p-4 font-medium">
-                  {cat.name}
-                </td>
-
-                <td className="p-4 text-slate-600">
-                  {cat.description}
-                </td>
-
-                <td className="p-4">
-                  {cat.date}
-                </td>
-
-                <td className="p-4">
-                  <div className="flex gap-2">
-                    <button className="bg-blue-500 text-white px-3 py-1 rounded">
-                      Edit
-                    </button>
-
-                    <button className="bg-red-500 text-white px-3 py-1 rounded">
-                      Delete
-                    </button>
-                  </div>
-                </td>
-
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      </table>
 
       {/* ================= MOBILE CARDS ================= */}
-      <div className="md:hidden  space-y-4">
+      <div className="md:hidden space-y-4">
 
         {categories.map((cat) => (
           <div
             key={cat.id}
-            className="border rounded-xl p-4 shadow-sm"
+            className="bg-[#1A2742] border border-slate-800 rounded-2xl p-4"
           >
 
-            <h2 className="font-bold text-lg">
+            <h2 className="font-bold text-white text-lg">
               {cat.name}
             </h2>
 
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-slate-400 mt-1">
               {cat.description}
             </p>
 
-            <p className="text-sm mt-2">
+            <p className="text-sm text-slate-300 mt-2">
               Created: {cat.date}
             </p>
 
             <div className="flex gap-2 mt-4">
 
-              <button className="bg-blue-500 text-white px-3 py-1 rounded w-full">
+              <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-xl w-full">
                 Edit
               </button>
 
-              <button className="bg-red-500 text-white px-3 py-1 rounded w-full">
+              <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl w-full">
                 Delete
               </button>
 
@@ -105,6 +106,7 @@ export default function CategoryTable() {
         ))}
 
       </div>
+
     </div>
   );
 }

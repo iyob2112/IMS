@@ -1,104 +1,154 @@
-import Sidebar from "@/components/Sidebar";
-import StatCard from "@/components/StatCard";
+import {
+  Package,
+  Layers3,
+  Truck,
+  DollarSign,
+  TrendingUp,
+  AlertTriangle,
+} from "lucide-react";
 
 export default function DashboardPage() {
   return (
-    <div className="flex bg-slate-100 min-h-screen">
-         <main className="flex-1 p-2 md:p-8">
-     
-
-        {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
-          <StatCard title="Total Products" value="150" />
-          <StatCard title="Categories" value="12" />
-          <StatCard title="Suppliers" value="24" />
-          <StatCard title="Today's Sales" value="$5,400" />
-        </div>
-
-        {/* Tables */}
-        <div className="grid lg:grid-cols-2 gap-6">
-          {/* Recent Sales */}
-          <div className="bg-white rounded-2xl shadow-sm p-6">
-            <h2 className="text-xl font-semibold mb-4">
-              Recent Sales
-            </h2>
-
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left py-3">
-                      Product
-                    </th>
-                    <th className="text-left py-3">
-                      Qty
-                    </th>
-                    <th className="text-left py-3">
-                      Amount
-                    </th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr className="border-b">
-                    <td className="py-3">
-                      Laptop
-                    </td>
-                    <td>2</td>
-                    <td>$1200</td>
-                  </tr>
-
-                  <tr className="border-b">
-                    <td className="py-3">
-                      Mouse
-                    </td>
-                    <td>5</td>
-                    <td>$100</td>
-                  </tr>
-
-                  <tr>
-                    <td className="py-3">
-                      Keyboard
-                    </td>
-                    <td>3</td>
-                    <td>$150</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Low Stock */}
-          <div className="bg-white rounded-2xl shadow-sm p-6">
-            <h2 className="text-xl font-semibold mb-4">
-              Low Stock Products
-            </h2>
-
-            <div className="space-y-4">
-              <div className="flex justify-between border-b pb-3">
-                <span>Printer Ink</span>
-                <span className="text-red-500 font-bold">
-                  3 Left
-                </span>
-              </div>
-
-              <div className="flex justify-between border-b pb-3">
-                <span>Monitor</span>
-                <span className="text-red-500 font-bold">
-                  2 Left
-                </span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>USB Cable</span>
-                <span className="text-red-500 font-bold">
-                  5 Left
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+<div className="min-h-screen bg-[#0B1120] p-6">
+  {/* Header */}
+  <div className="flex justify-between items-center mb-8">
+    <div>
+      <h1 className="text-4xl font-bold text-white">
+        Dashboard
+      </h1>
+      <p className="text-slate-400 mt-2">
+        Inventory overview and sales performance
+      </p>
     </div>
+
+    <div className="bg-[#131C31] px-5 py-3 rounded-2xl border border-slate-800">
+      <span className="text-slate-300">
+        June 2026
+      </span>
+    </div>
+  </div>
+
+  {/* Stats */}
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+
+    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <Package className="text-cyan-400 mb-4" size={28} />
+      <p className="text-slate-400">Products</p>
+      <h2 className="text-4xl font-bold text-white mt-2">
+        150
+      </h2>
+    </div>
+
+    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <Layers3 className="text-violet-400 mb-4" size={28} />
+      <p className="text-slate-400">Categories</p>
+      <h2 className="text-4xl font-bold text-white mt-2">
+        12
+      </h2>
+    </div>
+
+    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <Truck className="text-orange-400 mb-4" size={28} />
+      <p className="text-slate-400">Suppliers</p>
+      <h2 className="text-4xl font-bold text-white mt-2">
+        24
+      </h2>
+    </div>
+
+    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <DollarSign className="text-emerald-400 mb-4" size={28} />
+      <p className="text-slate-400">Sales</p>
+      <h2 className="text-4xl font-bold text-white mt-2">
+        $5,400
+      </h2>
+    </div>
+
+  </div>
+
+  {/* Revenue Card */}
+  <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 mb-8">
+    <p className="text-white/80">
+      Monthly Revenue
+    </p>
+
+    <h2 className="text-5xl font-bold text-white mt-2">
+      $25,480
+    </h2>
+
+    <div className="flex items-center gap-2 mt-4">
+      <TrendingUp className="text-green-300" />
+      <span className="text-green-200">
+        +12.5% this month
+      </span>
+    </div>
+  </div>
+
+  {/* Content */}
+  <div className="grid lg:grid-cols-2 gap-6">
+
+    {/* Recent Sales */}
+    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <h2 className="text-xl font-bold text-white mb-6">
+        Recent Sales
+      </h2>
+
+      <div className="space-y-4">
+        <div className="flex justify-between bg-[#1A2742] p-4 rounded-xl">
+          <span className="text-slate-300">Laptop</span>
+          <span className="text-green-400">$1200</span>
+        </div>
+
+        <div className="flex justify-between bg-[#1A2742] p-4 rounded-xl">
+          <span className="text-slate-300">Mouse</span>
+          <span className="text-green-400">$100</span>
+        </div>
+
+        <div className="flex justify-between bg-[#1A2742] p-4 rounded-xl">
+          <span className="text-slate-300">Keyboard</span>
+          <span className="text-green-400">$150</span>
+        </div>
+      </div>
+    </div>
+
+    {/* Low Stock */}
+    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <h2 className="text-xl font-bold text-white mb-6">
+        Low Stock Alerts
+      </h2>
+
+      <div className="space-y-4">
+
+        <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-xl flex justify-between">
+          <span className="text-red-300">
+            Printer Ink
+          </span>
+          <span className="text-red-400 font-bold">
+            3 Left
+          </span>
+        </div>
+
+        <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-xl flex justify-between">
+          <span className="text-red-300">
+            Monitor
+          </span>
+          <span className="text-red-400 font-bold">
+            2 Left
+          </span>
+        </div>
+
+        <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-xl flex justify-between">
+          <span className="text-yellow-300">
+            USB Cable
+          </span>
+          <span className="text-yellow-400 font-bold">
+            5 Left
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
   );
 }
