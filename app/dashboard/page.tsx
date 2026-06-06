@@ -9,7 +9,7 @@ import {
 
 export default function DashboardPage() {
   return (
-<div className="min-h-screen bg-[#0B1120] p-6">
+<div className="min-h-screen bg-[#0B1120] pt-10 p-3">
   {/* Header */}
   <div className="flex justify-between items-center mb-8">
     <div>
@@ -29,41 +29,65 @@ export default function DashboardPage() {
   </div>
 
   {/* Stats */}
-  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
 
-    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
-      <Package className="text-cyan-400 mb-4" size={28} />
+  {/* Products */}
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 flex items-center justify-between">
+
+    <div>
       <p className="text-slate-400">Products</p>
-      <h2 className="text-4xl font-bold text-white mt-2">
-        150
-      </h2>
+      <h2 className="text-4xl font-bold text-white mt-2">150</h2>
     </div>
 
-    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
-      <Layers3 className="text-violet-400 mb-4" size={28} />
-      <p className="text-slate-400">Categories</p>
-      <h2 className="text-4xl font-bold text-white mt-2">
-        12
-      </h2>
-    </div>
-
-    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
-      <Truck className="text-orange-400 mb-4" size={28} />
-      <p className="text-slate-400">Suppliers</p>
-      <h2 className="text-4xl font-bold text-white mt-2">
-        24
-      </h2>
-    </div>
-
-    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
-      <DollarSign className="text-emerald-400 mb-4" size={28} />
-      <p className="text-slate-400">Sales</p>
-      <h2 className="text-4xl font-bold text-white mt-2">
-        $5,400
-      </h2>
+    <div className="bg-cyan-500/10 p-3 rounded-2xl">
+      <Package className="text-cyan-400" size={28} />
     </div>
 
   </div>
+
+  {/* Categories */}
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 flex items-center justify-between">
+
+    <div>
+      <p className="text-slate-400">Categories</p>
+      <h2 className="text-4xl font-bold text-white mt-2">12</h2>
+    </div>
+
+    <div className="bg-violet-500/10 p-3 rounded-2xl">
+      <Layers3 className="text-violet-400" size={28} />
+    </div>
+
+  </div>
+
+  {/* Suppliers */}
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 flex items-center justify-between">
+
+    <div>
+      <p className="text-slate-400">Suppliers</p>
+      <h2 className="text-4xl font-bold text-white mt-2">24</h2>
+    </div>
+
+    <div className="bg-orange-500/10 p-3 rounded-2xl">
+      <Truck className="text-orange-400" size={28} />
+    </div>
+
+  </div>
+
+  {/* Sales */}
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 flex items-center justify-between">
+
+    <div>
+      <p className="text-slate-400">Sales</p>
+      <h2 className="text-4xl font-bold text-white mt-2">$5,400</h2>
+    </div>
+
+    <div className="bg-emerald-500/10 p-3 rounded-2xl">
+      <DollarSign className="text-emerald-400" size={28} />
+    </div>
+
+  </div>
+
+</div>
 
   {/* Revenue Card */}
   <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 mb-8">

@@ -5,7 +5,7 @@ import SalesTable from "@/components/SalesTable";
 
 export default function SalesPage() {
   return (
-    <div className="min-h-screen bg-[#0B1120] text-white p-3">
+    <div className="min-h-screen bg-[#0B1120] text-white  pt-10 p-3">
 
       {/* Header */}
       <div className="mb-6">

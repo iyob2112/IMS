@@ -1,10 +1,11 @@
 "use client";
 
 import ReportCard from "@/components/ReportCard";
+import { TrendingUp, Box, Package, AlertTriangle } from "lucide-react";
 
 export default function ReportsPage() {
   return (
-    <div className="min-h-screen bg-[#0B1120] text-white p-3">
+    <div className="min-h-screen bg-[#0B1120] text-white  pt-10 p-3">
 
       {/* Header */}
       <div className="mb-6">
@@ -18,33 +19,45 @@ export default function ReportsPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
+   <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
 
-        <ReportCard
-          title="Total Sales"
-          value="$12,450"
-          color="text-green-400"
-        />
+  <ReportCard
+    title="Total Sales"
+    value="$12,450"
+    color="text-green-400"
+    icon={TrendingUp}
+    iconBg="bg-green-500/10"
+    iconColor="text-green-400"
+  />
 
-        <ReportCard
-          title="Total Products"
-          value="120"
-          color="text-slate-200"
-        />
+  <ReportCard
+    title="Total Products"
+    value="120"
+    color="text-cyan-400"
+    icon={Box}
+    iconBg="bg-cyan-500/10"
+    iconColor="text-cyan-400"
+  />
 
-        <ReportCard
-          title="Total Stock Value"
-          value="$8,300"
-          color="text-blue-400"
-        />
+  <ReportCard
+    title="Total Stock Value"
+    value="$8,300"
+    color="text-blue-400"
+    icon={Package}
+    iconBg="bg-blue-500/10"
+    iconColor="text-blue-400"
+  />
 
-        <ReportCard
-          title="Low Stock Items"
-          value="7"
-          color="text-red-400"
-        />
+  <ReportCard
+    title="Low Stock Items"
+    value="7"
+    color="text-red-400"
+    icon={AlertTriangle}
+    iconBg="bg-red-500/10"
+    iconColor="text-red-400"
+  />
 
-      </div>
+</div>
 
       {/* Sales Report */}
       <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-4 sm:p-6 mt-6 sm:mt-8">

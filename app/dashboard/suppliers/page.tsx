@@ -9,7 +9,7 @@ export default function SuppliersPage() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0B1120] p-3 text-white">
+    <div className="min-h-screen bg-[#0B1120]  pt-10 p-3 text-white">
 
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between gap-4 mb-6">

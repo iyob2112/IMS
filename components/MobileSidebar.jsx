@@ -11,7 +11,7 @@ export default function MobileSidebar() {
   return (
     <>
       {/* Top bar */}
-      <div className="lg:hidden flex items-center justify-between bg-slate-950 text-white p-4">
+      <div className="lg:hidden flex items-center justify-between bg-slate-950 text-white p-4 fixed w-full z-50">
         <h1 className="font-bold">Shop Inventory</h1>
 
         <button
