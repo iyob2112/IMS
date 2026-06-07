@@ -3,8 +3,10 @@
 import { useState } from "react";
 import ProductTable from "@/components/ProductTable";
 import AddProductModal from "@/components/AddProductModal";
+import { useTranslation } from "react-i18next";
 
 export default function ProductsPage() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   return (
@@ -15,17 +17,17 @@ export default function ProductsPage() {
 
         <div>
           <h1 className="text-3xl font-bold">
-            Products Management
+            {t("productsManagement")}
           </h1>
           <p className="text-slate-400 mt-1">
-            Manage your inventory products
+            {t("manageYourInventoryProducts")}
           </p>
         </div>
 
         <div className="flex gap-3">
           <input
             type="text"
-            placeholder="Search Product..."
+            placeholder={t("searchProduct")}
             className="bg-[#131C31] border border-slate-800 text-white px-4 py-2 rounded-xl outline-none"
           />
 
@@ -33,7 +35,7 @@ export default function ProductsPage() {
             onClick={() => setOpen(true)}
             className="bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-xl"
           >
-            + Add Product
+            {t("addProduct")}
           </button>
         </div>
       </div>

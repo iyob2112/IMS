@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {
   Package,
   Layers3,
@@ -7,25 +11,24 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
+
+
+
 export default function DashboardPage() {
+    const { t } = useTranslation();
   return (
 <div className="min-h-screen bg-[#0B1120] pt-10 p-3">
   {/* Header */}
   <div className="flex justify-between items-center mb-8">
     <div>
       <h1 className="text-4xl font-bold text-white">
-        Dashboard
+       {t("dashboard")}
       </h1>
       <p className="text-slate-400 mt-2">
-        Inventory overview and sales performance
+         {t("inventoryOverview")}
       </p>
     </div>
-
-    <div className="bg-[#131C31] px-5 py-3 rounded-2xl border border-slate-800">
-      <span className="text-slate-300">
-        June 2026
-      </span>
-    </div>
+   
   </div>
 
   {/* Stats */}
@@ -35,7 +38,7 @@ export default function DashboardPage() {
   <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 flex items-center justify-between">
 
     <div>
-      <p className="text-slate-400">Products</p>
+      <p className="text-slate-400">  {t("products")}</p>
       <h2 className="text-4xl font-bold text-white mt-2">150</h2>
     </div>
 
@@ -49,7 +52,7 @@ export default function DashboardPage() {
   <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 flex items-center justify-between">
 
     <div>
-      <p className="text-slate-400">Categories</p>
+      <p className="text-slate-400">  {t("categories")}</p>
       <h2 className="text-4xl font-bold text-white mt-2">12</h2>
     </div>
 
@@ -63,7 +66,7 @@ export default function DashboardPage() {
   <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 flex items-center justify-between">
 
     <div>
-      <p className="text-slate-400">Suppliers</p>
+      <p className="text-slate-400">  {t("suppliers")}</p>
       <h2 className="text-4xl font-bold text-white mt-2">24</h2>
     </div>
 
@@ -77,7 +80,7 @@ export default function DashboardPage() {
   <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 flex items-center justify-between">
 
     <div>
-      <p className="text-slate-400">Sales</p>
+      <p className="text-slate-400">  {t("sales")}</p>
       <h2 className="text-4xl font-bold text-white mt-2">$5,400</h2>
     </div>
 
@@ -92,7 +95,7 @@ export default function DashboardPage() {
   {/* Revenue Card */}
   <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 mb-8">
     <p className="text-white/80">
-      Monthly Revenue
+      {t("monthlyRevenue")}
     </p>
 
     <h2 className="text-5xl font-bold text-white mt-2">
@@ -102,7 +105,7 @@ export default function DashboardPage() {
     <div className="flex items-center gap-2 mt-4">
       <TrendingUp className="text-green-300" />
       <span className="text-green-200">
-        +12.5% this month
+        +12.5% {t("thisMonth")}
       </span>
     </div>
   </div>
@@ -113,7 +116,7 @@ export default function DashboardPage() {
     {/* Recent Sales */}
     <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
       <h2 className="text-xl font-bold text-white mb-6">
-        Recent Sales
+        {t("recentSales")}
       </h2>
 
       <div className="space-y-4">
@@ -137,7 +140,7 @@ export default function DashboardPage() {
     {/* Low Stock */}
     <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
       <h2 className="text-xl font-bold text-white mb-6">
-        Low Stock Alerts
+        {t("lowStockAlerts")}
       </h2>
 
       <div className="space-y-4">
@@ -147,7 +150,7 @@ export default function DashboardPage() {
             Printer Ink
           </span>
           <span className="text-red-400 font-bold">
-            3 Left
+            3 {t("left")}
           </span>
         </div>
 
@@ -156,7 +159,7 @@ export default function DashboardPage() {
             Monitor
           </span>
           <span className="text-red-400 font-bold">
-            2 Left
+            2 {t("left")}
           </span>
         </div>
 
@@ -165,7 +168,7 @@ export default function DashboardPage() {
             USB Cable
           </span>
           <span className="text-yellow-400 font-bold">
-            5 Left
+            5 {t("left")}
           </span>
         </div>
 

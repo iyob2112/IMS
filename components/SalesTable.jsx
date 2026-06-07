@@ -1,4 +1,6 @@
+import { useTranslation } from "react-i18next";
 export default function SalesTable() {
+  const { t } = useTranslation();
   const sales = [
     {
       id: 1,
@@ -34,12 +36,12 @@ export default function SalesTable() {
 
         <thead className="bg-[#1A2742] text-slate-300">
           <tr>
-            <th className="p-4 text-left">Product</th>
-            <th className="p-4 text-left">Quantity</th>
-            <th className="p-4 text-left">Unit Price</th>
-            <th className="p-4 text-left">Total</th>
-            <th className="p-4 text-left">Date</th>
-            <th className="p-4 text-left">Actions</th>
+            <th className="p-4 text-left">{t("product")}</th>
+            <th className="p-4 text-left">{t("quantity")}</th>
+            <th className="p-4 text-left">{t("unitPrice")}</th>
+            <th className="p-4 text-left">{t("total")}</th>
+            <th className="p-4 text-left">{t("date")}</th>
+            <th className="p-4 text-left">{t("actions")}</th>
           </tr>
         </thead>
 
@@ -72,7 +74,7 @@ export default function SalesTable() {
 
               <td className="p-4">
                 <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
-                  Delete
+                  {t("delete")}
                 </button>
               </td>
 
@@ -96,24 +98,24 @@ export default function SalesTable() {
             </h2>
 
             <p className="text-sm text-slate-300 mt-1">
-              Quantity: {s.qty}
+              {t("quantity")}: {s.qty}
             </p>
 
             <p className="text-sm text-slate-300">
-              Unit Price: {s.unitPrice}
+              {t("unitPrice")}: {s.unitPrice}
             </p>
 
             <p className="text-sm font-bold text-green-400">
-              Total: {s.total}
+              {t("total")}: {s.total}
             </p>
 
             <p className="text-sm text-slate-400">
-              Date: {s.date}
+              {t("date")}: {s.date}
             </p>
 
             <div className="mt-4">
               <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl w-full">
-                Delete
+                {t("delete")}
               </button>
             </div>
 

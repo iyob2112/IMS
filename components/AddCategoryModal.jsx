@@ -1,9 +1,11 @@
 "use client";
+import { useTranslation } from "react-i18next";
 
 export default function AddCategoryModal({
   isOpen,
   onClose,
 }) {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -15,7 +17,7 @@ export default function AddCategoryModal({
         <div className="flex justify-between items-center mb-6">
 
           <h2 className="text-xl font-bold">
-            Add Category
+            {t("addNewCategory")}
           </h2>
 
           <button
@@ -29,19 +31,19 @@ export default function AddCategoryModal({
 
         {/* Inputs */}
         <input
-          placeholder="Category Name"
+          placeholder={t("categoryName")}
           className="w-full bg-[#1A2742] border border-slate-700 text-white p-3 rounded-xl mb-4 outline-none"
         />
 
         <textarea
           rows={4}
-          placeholder="Description"
+          placeholder={t("description")}
           className="w-full bg-[#1A2742] border border-slate-700 text-white p-3 rounded-xl outline-none"
         />
 
         {/* Button */}
         <button className="mt-5 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl">
-          Save Category
+          {t("saveCategory")}
         </button>
 
       </div>

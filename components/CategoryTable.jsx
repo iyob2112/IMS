@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function CategoryTable() {
+  const { t } = useTranslation();
   const categories = [
     {
       id: 1,
@@ -28,10 +31,10 @@ export default function CategoryTable() {
 
         <thead className="bg-[#1A2742] text-slate-300">
           <tr>
-            <th className="p-4 text-left">Category</th>
-            <th className="p-4 text-left">Description</th>
-            <th className="p-4 text-left">Created Date</th>
-            <th className="p-4 text-left">Actions</th>
+            <th className="p-4 text-left">{t("categoryName")}</th>
+            <th className="p-4 text-left">{t("description")}</th>
+            <th className="p-4 text-left">{t("createdDate")}</th>
+            <th className="p-4 text-left">{t("actions")}</th>
           </tr>
         </thead>
 
@@ -56,11 +59,11 @@ export default function CategoryTable() {
               <td className="p-4">
                 <div className="flex gap-2">
                   <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg">
-                    Edit
+                    {t("edit")}
                   </button>
 
                   <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
-                    Delete
+                    {t("delete")}
                   </button>
                 </div>
               </td>
@@ -88,17 +91,17 @@ export default function CategoryTable() {
             </p>
 
             <p className="text-sm text-slate-300 mt-2">
-              Created: {cat.date}
+              {t("Created")}: {cat.date}
             </p>
 
             <div className="flex gap-2 mt-4">
 
               <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-xl w-full">
-                Edit
+                {t("edit")}
               </button>
 
               <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl w-full">
-                Delete
+                {t("delete")}
               </button>
 
             </div>

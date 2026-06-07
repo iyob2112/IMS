@@ -1,9 +1,11 @@
 "use client";
+import { useTranslation } from "react-i18next";
 
 export default function AddSupplierModal({
   isOpen,
   onClose,
 }) {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -15,7 +17,7 @@ export default function AddSupplierModal({
         <div className="flex justify-between items-center mb-6">
 
           <h2 className="text-xl font-bold">
-            Add Supplier
+            {t("AddSupplier")}
           </h2>
 
           <button
@@ -31,30 +33,37 @@ export default function AddSupplierModal({
         <div className="space-y-4">
 
           <input
-            placeholder="Supplier Name"
+            placeholder={t("name")}
             className="w-full bg-[#1A2742] border border-slate-700 text-white p-3 rounded-xl outline-none"
           />
 
           <input
-            placeholder="Phone Number"
+            placeholder={t("phone")}
             className="w-full bg-[#1A2742] border border-slate-700 text-white p-3 rounded-xl outline-none"
           />
 
           <input
-            placeholder="Address"
+            placeholder={t("address")}
             className="w-full bg-[#1A2742] border border-slate-700 text-white p-3 rounded-xl outline-none"
           />
 
           <input
-            placeholder="Contact Person"
+            placeholder={t("contactPerson")}
             className="w-full bg-[#1A2742] border border-slate-700 text-white p-3 rounded-xl outline-none"
           />
+
+          <input
+            placeholder={t("address")}
+            className="w-full bg-[#1A2742] border border-slate-700 text-white p-3 rounded-xl outline-none"
+          />
+
+        
 
         </div>
 
         {/* Save Button */}
         <button className="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl">
-          Save Supplier
+          {t("saveSupplier")}
         </button>
 
       </div>

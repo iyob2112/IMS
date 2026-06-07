@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function SupplierTable() {
+  const { t } = useTranslation();
   const suppliers = [
     {
       id: 1,
@@ -31,11 +34,11 @@ export default function SupplierTable() {
 
         <thead className="bg-[#1A2742] text-slate-300">
           <tr>
-            <th className="p-4 text-left">Supplier</th>
-            <th className="p-4 text-left">Phone</th>
-            <th className="p-4 text-left">Address</th>
-            <th className="p-4 text-left">Contact Person</th>
-            <th className="p-4 text-left">Actions</th>
+            <th className="p-4 text-left">{t("supplier")}</th>
+            <th className="p-4 text-left">{t("phone")}</th>
+            <th className="p-4 text-left">{t("address")}</th>
+            <th className="p-4 text-left">{t("contactPerson")}</th>
+            <th className="p-4 text-left">{t("actions")}</th>
           </tr>
         </thead>
 
@@ -66,11 +69,11 @@ export default function SupplierTable() {
                 <div className="flex gap-2">
 
                   <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg">
-                    Edit
+                    {t("edit")}
                   </button>
 
                   <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
-                    Delete
+                    {t("delete")}
                   </button>
 
                 </div>
@@ -110,11 +113,11 @@ export default function SupplierTable() {
             <div className="flex gap-2 mt-4">
 
               <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-xl w-full">
-                Edit
+                {t("edit")}
               </button>
 
               <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl w-full">
-                Delete
+                {t("delete")}
               </button>
 
             </div>

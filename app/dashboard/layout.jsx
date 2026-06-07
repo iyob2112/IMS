@@ -1,6 +1,6 @@
 import Sidebar from "@/components/Sidebar";
 import MobileSidebar from "@/components/MobileSidebar";
-
+import Header from "@/components/Header";
 
 export default function DashboardLayout({ children }) {
   return (
@@ -9,17 +9,18 @@ export default function DashboardLayout({ children }) {
       <div className="hidden lg:block">
         <Sidebar />
       </div>
-
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col lg:ml-72">
         {/* THIS makes mobile sidebar available everywhere */}
         <MobileSidebar />
+        <Header />
 
         <div className="p-3 bg-[#0B1120]">
 
           <div className="mt-6">{children}</div>
         </div>
       </div>
+
     </div>
   );
 }

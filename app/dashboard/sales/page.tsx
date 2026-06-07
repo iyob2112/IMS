@@ -2,19 +2,21 @@
 
 import SalesForm from "@/components/SalesForm";
 import SalesTable from "@/components/SalesTable";
+import { useTranslation } from "react-i18next";
 
 export default function SalesPage() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-[#0B1120] text-white  pt-10 p-3">
 
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold">
-          Sales Management
+          {t("salesManagement")}
         </h1>
 
         <p className="text-slate-400 mt-1">
-          Record sales and track transactions
+          {t("recordSalesAndTrackTransactions")}
         </p>
       </div>
 

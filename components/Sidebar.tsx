@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -10,6 +11,7 @@ import {
   PackagePlus,
   ShoppingCart,
   FileText,
+  UserCircle2,
 } from "lucide-react";
 
 // 👇 ADD THIS TYPE
@@ -19,29 +21,30 @@ type SidebarProps = {
 
 export default function Sidebar({ onNavigate }: SidebarProps) {
   const pathname = usePathname();
-
+    const { t } = useTranslation();
   const menu = [
-    { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
-    { name: "Products", path: "/dashboard/products", icon: Box },
-    { name: "Categories", path: "/dashboard/categories", icon: Tags },
-    { name: "Suppliers", path: "/dashboard/suppliers", icon: Truck },
-    { name: "Stock In", path: "/dashboard/stock-in", icon: PackagePlus },
-    { name: "Sales", path: "/dashboard/sales", icon: ShoppingCart },
-    { name: "Reports", path: "/dashboard/reports", icon: FileText },
+    { name: t("profile"), path: "/dashboard/profile", icon: UserCircle2 },
+    { name: t("dashboard"), path: "/dashboard", icon: LayoutDashboard },
+    { name: t("products"), path: "/dashboard/products", icon: Box },
+    { name: t("categories"), path: "/dashboard/categories", icon: Tags },
+    { name: t("suppliers"), path: "/dashboard/suppliers", icon: Truck },
+    { name: t("stockIn"), path: "/dashboard/stock-in", icon: PackagePlus },
+    { name: t("sales"), path: "/dashboard/sales", icon: ShoppingCart },
+    { name: t("reports"), path: "/dashboard/reports", icon: FileText },
 
       
   ];
 
   return (
-    <aside className="w-72 bg-slate-950 text-white min-h-screen p-6">
+    <aside className="w-72 bg-slate-950 text-white min-h-screen h-full p-6 pt-20 fixed  ">
 
       {/* Logo */}
       <div className="mb-10">
         <h1 className="text-xl font-bold tracking-wide">
-          Shop Inventory
+          {t("ShopInventory")}
         </h1>
         <p className="text-slate-400 text-sm">
-          Admin Panel
+          {t("AdminPanel")}
         </p>
       </div>
 
