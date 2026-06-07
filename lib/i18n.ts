@@ -76,15 +76,15 @@ const resources = {
       saveSale: "Save Sale",
       total: "Total",
       //  Reports
-      ReportsandAnalytics:"Reports & Analytics",
-      Overviewofsalesstockandperformance:"Overview of sales, stock, and performance",
-      TotalSales:"Total Sales",
-      TotalProducts:"Total Products",
-      TotalStockValue:"Total Stock Value",
-      LowStockItems:"Low Stock Items",
-      SalesReport:"Sales Report",
-      LowStockReport:"Low Stock Report",
-      revenue:"Revenue",
+      ReportsandAnalytics: "Reports & Analytics",
+      Overviewofsalesstockandperformance: "Overview of sales, stock, and performance",
+      TotalSales: "Total Sales",
+      TotalProducts: "Total Products",
+      TotalStockValue: "Total Stock Value",
+      LowStockItems: "Low Stock Items",
+      SalesReport: "Sales Report",
+      LowStockReport: "Low Stock Report",
+      revenue: "Revenue",
       left: "left",
       // Header
       ShopInventory: "Shop Inventory",
@@ -92,7 +92,16 @@ const resources = {
       Admin: "Admin",
       Administrator: "Administrator",
       // Sidebar
-      AdminPanel: "Admin Panel"
+      AdminPanel: "Admin Panel",
+      // profile
+      profile: "Profile",
+      adminUser: "Admin User",
+      accountInfo: "Account Info",
+      role: "Role",
+      status: "Status",
+      joined: "Joined",
+      administrator: "Administrator",
+      active: "Active"
     },
   },
   ti: {
@@ -166,15 +175,15 @@ const resources = {
       saveSale: "መሸጣ መዝግብ",
       total: "ጠቅላላ",
       //  Reports
-      ReportsandAnalytics:"ሪፖርትን ኣፈፃፅማን",
-      Overviewofsalesstockandperformance:"ዝርዝር መሸጣ ንብረትን ኣፈፃፅማን",
-      TotalSales:"ጠቅላላ መሸጣ",
-      TotalProducts:"ጠቅላላ ፍርያት",
-      TotalStockValue:"ጠቅላላ አቁሑ ዋጋ",
-      LowStockItems:"ትሑት በዝሒ ለለዎም አቁሑ",
-      SalesReport:"መሸጣ ሪፖርት",
-      LowStockReport:"ትሑት በዝሒ ለለዎም አቁሑ ሪፖርት",
-      revenue:"እቶት",
+      ReportsandAnalytics: "ሪፖርትን ኣፈፃፅማን",
+      Overviewofsalesstockandperformance: "ዝርዝር መሸጣ ንብረትን ኣፈፃፅማን",
+      TotalSales: "ጠቅላላ መሸጣ",
+      TotalProducts: "ጠቅላላ ፍርያት",
+      TotalStockValue: "ጠቅላላ አቁሑ ዋጋ",
+      LowStockItems: "ትሑት በዝሒ ለለዎም አቁሑ",
+      SalesReport: "መሸጣ ሪፖርት",
+      LowStockReport: "ትሑት በዝሒ ለለዎም አቁሑ ሪፖርት",
+      revenue: "እቶት",
       left: "ቀሪ",
       // Header
       ShopInventory: "ድኳን ዝርዝር ኣቑሑት",
@@ -182,7 +191,16 @@ const resources = {
       Admin: "ኣድሚን",
       Administrator: "ኣመሓዳሪ",
       // Sidebar
-      AdminPanel: "ኣድሚን ፓነል"
+      AdminPanel: "ኣድሚን ፓነል",
+      // profile
+      profile: "ፕሮፋይል",
+      adminUser: "ኣድሚን ተጠቃሚ",
+      accountInfo: "መረጃ ሂሳብ",
+      role: "ሚና",
+      status: "ሁኔታ",
+        joined: "ተመዝግቧል",
+      administrator: "ኣመሓዳሪ",
+      active: "ንቁ"
     },
   },
 };
