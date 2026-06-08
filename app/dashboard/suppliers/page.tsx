@@ -34,9 +34,52 @@ export default function SuppliersPage() {
         </button>
 
       </div>
+      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+  <div className="bg-[#131C31] p-6 rounded-3xl border border-slate-800">
+    <h3 className="text-slate-400">
+      Total Suppliers
+    </h3>
+
+    <h2 className="text-4xl font-bold text-white mt-2">
+      24
+    </h2>
+  </div>
+
+  <div className="bg-[#131C31] p-6 rounded-3xl border border-slate-800">
+    <h3 className="text-slate-400">
+      Active Suppliers
+    </h3>
+
+    <h2 className="text-4xl font-bold text-green-400 mt-2">
+      20
+    </h2>
+  </div>
+
+  <div className="bg-[#131C31] p-6 rounded-3xl border border-slate-800">
+    <h3 className="text-slate-400">
+      Total Purchases
+    </h3>
+
+    <h2 className="text-4xl font-bold text-cyan-400 mt-2">
+      $54K
+    </h2>
+  </div>
+
+  <div className="bg-[#131C31] p-6 rounded-3xl border border-slate-800">
+    <h3 className="text-slate-400">
+      Outstanding Due
+    </h3>
+
+    <h2 className="text-4xl font-bold text-red-400 mt-2">
+      $7K
+    </h2>
+  </div>
+
+</div>
 
       {/* Main Card */}
-      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 shadow-lg">
+      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 shadow-lg mt-5 pt-8">
 
         <SupplierTable />
 

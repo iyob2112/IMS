@@ -1,128 +1,272 @@
-import { useTranslation } from "react-i18next";
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { Eye, Pencil, Trash2, Barcode } from "lucide-react";
+import { products } from "@/data/products";
 
 export default function ProductTable() {
-  const { t } = useTranslation();
-  const products = [
-    {
-      id: 1,
-      name: "Laptop",
-      category: "Electronics",
-      purchase: "$700",
-      selling: "$900",
-      quantity: 15,
-    },
-    {
-      id: 2,
-      name: "Mouse",
-      category: "Accessories",
-      purchase: "$10",
-      selling: "$15",
-      quantity: 80,
-    },
-    {
-      id: 3,
-      name: "Keyboard",
-      category: "Accessories",
-      purchase: "$25",
-      selling: "$40",
-      quantity: 8,
-    },
-  ];
+  const [selected, setSelected] = useState<number[]>([]);
+
+  const toggleSelect = (id: number) => {
+    if (selected.includes(id)) {
+      setSelected(selected.filter((x) => x !== id));
+    } else {
+      setSelected([...selected, id]);
+    }
+  };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="w-full">
 
-      {/* Desktop Table */}
-      <table className="w-full hidden md:table text-sm text-slate-300">
+      {/* ================= MOBILE CARDS ================= */}
+      <div className="grid gap-4 md:hidden">
 
-        <thead className="bg-[#1A2742] text-slate-300">
-          <tr>
-            <th className="p-4 text-left">{t("products")}</th>
-            <th className="p-4 text-left">{t("categories")}</th>
-            <th className="p-4 text-left">{t("purchase")}</th>
-            <th className="p-4 text-left">{t("selling")}</th>
-            <th className="p-4 text-left">{t("qty")}</th>
-            <th className="p-4 text-left">{t("actions")}</th>
-          </tr>
-        </thead>
+        {products.map((product) => {
+          const status =
+            product.stock === 0
+              ? "Out Of Stock"
+              : product.stock < 10
+              ? "Low Stock"
+              : "In Stock";
 
-        <tbody>
-          {products.map((p) => (
-            <tr
-              key={p.id}
-              className="border-t border-slate-800 hover:bg-[#1A2742]"
+          return (
+            <div
+              key={product.id}
+              className="bg-[#131C31] rounded-2xl p-4 border border-slate-800"
             >
-              <td className="p-4 text-white font-medium">{p.name}</td>
-              <td className="p-4 text-slate-400">{p.category}</td>
-              <td className="p-4">{p.purchase}</td>
-              <td className="p-4">{p.selling}</td>
 
-              <td className="p-4">
+              {/* Top */}
+              <div className="flex justify-between items-start">
+                <div className="flex gap-3">
+
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-12 h-12 rounded-lg object-cover"
+                  />
+
+                  <div>
+                    <p className="text-white font-semibold">
+                      {product.name}
+                    </p>
+
+                    <p className="text-slate-400 text-sm">
+                      {product.category}
+                    </p>
+                  </div>
+
+                </div>
+
+                <input
+                  type="checkbox"
+                  checked={selected.includes(product.id)}
+                  onChange={() => toggleSelect(product.id)}
+                />
+              </div>
+
+              {/* Info */}
+              <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                <p className="text-slate-400">
+                  SKU:{" "}
+                  <span className="text-cyan-400">
+                    {product.sku}
+                  </span>
+                </p>
+
+                <p className="text-slate-400">
+                  Stock:{" "}
+                  <span className="text-white">
+                    {product.stock}
+                  </span>
+                </p>
+
+                <p className="text-slate-400">
+                  Cost:{" "}
+                  <span className="text-white">
+                    ${product.purchasePrice}
+                  </span>
+                </p>
+
+                <p className="text-slate-400">
+                  Price:{" "}
+                  <span className="text-green-400">
+                    ${product.sellingPrice}
+                  </span>
+                </p>
+              </div>
+
+              {/* Status */}
+              <div className="mt-3">
                 <span
-                  className={`px-3 py-1 rounded-xl text-xs ${
-                    p.quantity > 20
+                  className={`px-3 py-1 rounded-full text-xs ${
+                    status === "In Stock"
                       ? "bg-green-500/20 text-green-400"
+                      : status === "Low Stock"
+                      ? "bg-yellow-500/20 text-yellow-400"
                       : "bg-red-500/20 text-red-400"
                   }`}
                 >
-                  {p.quantity}
+                  {status}
                 </span>
-              </td>
+              </div>
 
-              <td className="p-4">
-                <div className="flex gap-2">
-                  <button className="bg-indigo-600 px-3 py-1 rounded-lg text-white">
-                    {t("edit")}
-                  </button>
-                  <button className="bg-red-600 px-3 py-1 rounded-lg text-white">
-                    {t("delete")}
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+              {/* Actions */}
+              <div className="flex gap-2 mt-4  ">
 
-      </table>
+                <Link
+                  href={`/dashboard/products/${product.id}`}
+                  className="bg-slate-800 p-2 rounded-lg flex-1 text-center"
+                >
+                  <Eye size={16} />
+                </Link>
 
-      {/* Mobile Cards */}
-      <div className="md:hidden space-y-4">
+                <button className="bg-slate-800 p-2 rounded-lg flex-1">
+                  <Pencil size={16} />
+                </button>
 
-        {products.map((p) => (
-          <div
-            key={p.id}
-            className="bg-[#1A2742] border border-slate-800 rounded-2xl p-4"
-          >
-            <div className="flex justify-between">
-              <h2 className="text-white font-bold">{p.name}</h2>
+                <button className="bg-slate-800 p-2 rounded-lg flex-1">
+                  <Barcode size={16} />
+                </button>
 
-              <span className="text-xs px-3 py-1 rounded-xl bg-red-500/20 text-red-400">
-                {p.quantity}
-              </span>
+                <button className="bg-red-500/20 text-red-400 p-2 rounded-lg flex-1">
+                  <Trash2 size={16} />
+                </button>
+
+              </div>
+
             </div>
+          );
+        })}
+      </div>
 
-            <p className="text-slate-400 text-sm mt-2">
-              {p.category}
-            </p>
+      {/* ================= DESKTOP TABLE ================= */}
+      <div className="hidden md:block">
 
-            <p className="text-slate-300 text-sm">
-              {t("purchase")}: {p.purchase}
-            </p>
+        <div className="overflow-x-auto">
 
-            <p className="text-slate-300 text-sm">
-              {t("selling")}: {p.selling}
-            </p>
+          <table className="w-full">
 
-            <div className="flex gap-2 mt-3">
-              <button className="w-full bg-indigo-600 py-2 rounded-xl">
-                {t("edit")}
-              </button>
-              <button className="w-full bg-red-600 py-2 rounded-xl">
-                {t("delete")}
-              </button>
-            </div>
-          </div>
-        ))}
+            <thead>
+              <tr className="border-b border-slate-800 text-slate-400">
+                <th className="p-4">
+                  <input type="checkbox" />
+                </th>
+
+                <th className="p-4 text-left">Image</th>
+                <th className="p-4 text-left">SKU</th>
+                <th className="p-4 text-left">Product</th>
+                <th className="p-4 text-left">Category</th>
+                <th className="p-4 text-left">Cost</th>
+                <th className="p-4 text-left">Price</th>
+                <th className="p-4 text-left">Stock</th>
+                <th className="p-4 text-left">Status</th>
+                <th className="p-4 text-left">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {products.map((product) => {
+                const status =
+                  product.stock === 0
+                    ? "Out Of Stock"
+                    : product.stock < 10
+                    ? "Low Stock"
+                    : "In Stock";
+
+                return (
+                  <tr
+                    key={product.id}
+                    className="border-b border-slate-800 hover:bg-[#0B1120]"
+                  >
+
+                    <td className="p-4">
+                      <input
+                        type="checkbox"
+                        checked={selected.includes(product.id)}
+                        onChange={() => toggleSelect(product.id)}
+                      />
+                    </td>
+
+                    <td className="p-4">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-10 h-10 rounded-lg object-cover"
+                      />
+                    </td>
+
+                    <td className="p-4 text-cyan-400">
+                      {product.sku}
+                    </td>
+
+                    <td className="p-4 text-white">
+                      {product.name}
+                    </td>
+
+                    <td className="p-4 text-slate-300">
+                      {product.category}
+                    </td>
+
+                    <td className="p-4">
+                      ${product.purchasePrice}
+                    </td>
+
+                    <td className="p-4 text-green-400">
+                      ${product.sellingPrice}
+                    </td>
+
+                    <td className="p-4">
+                      {product.stock}
+                    </td>
+
+                    <td className="p-4">
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs ${
+                          status === "In Stock"
+                            ? "bg-green-500/20 text-green-400"
+                            : status === "Low Stock"
+                            ? "bg-yellow-500/20 text-yellow-400"
+                            : "bg-red-500/20 text-red-400"
+                        }`}
+                      >
+                        {status}
+                      </span>
+                    </td>
+
+                    <td className="p-4 ">
+                      <div className="flex gap-2">
+
+                        <Link
+                          href={`/dashboard/products/${product.id}`}
+                          className="bg-slate-800 p-2 rounded-lg"
+                        >
+                          <Eye size={16} />
+                        </Link>
+
+                        <button className="bg-slate-800 p-2 rounded-lg">
+                          <Pencil size={16} />
+                        </button>
+
+                        <button className="bg-slate-800 p-2 rounded-lg">
+                          <Barcode size={16} />
+                        </button>
+
+                        <button className="bg-red-500/20 text-red-400 p-2 rounded-lg">
+                          <Trash2 size={16} />
+                        </button>
+
+                      </div>
+                    </td>
+
+                  </tr>
+                );
+              })}
+            </tbody>
+
+          </table>
+
+        </div>
 
       </div>
 

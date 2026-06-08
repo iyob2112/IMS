@@ -1,126 +1,188 @@
-import { useTranslation } from "react-i18next";
+"use client";
+
+const stockEntries = [
+  {
+    id: "GRN-1001",
+    product: "Gaming Laptop",
+    supplier: "Tech Distributors",
+    warehouse: "Main Warehouse",
+    qty: 10,
+    unitCost: "$850",
+    total: "$8,500",
+    receivedBy: "Admin",
+    status: "Completed",
+    date: "2026-06-08",
+  },
+  {
+    id: "GRN-1002",
+    product: "Monitor",
+    supplier: "Global Electronics",
+    warehouse: "Warehouse A",
+    qty: 20,
+    unitCost: "$200",
+    total: "$4,000",
+    receivedBy: "Manager",
+    status: "Pending",
+    date: "2026-06-08",
+  },
+];
+
 export default function StockTable() {
-  const { t } = useTranslation();
-  const stock = [
-    {
-      id: 1,
-      product: "Laptop",
-      supplier: "Tech Distributors",
-      qty: 10,
-      price: "$700",
-      date: "2026-06-01",
-    },
-    {
-      id: 2,
-      product: "Mouse",
-      supplier: "Global Electronics",
-      qty: 50,
-      price: "$10",
-      date: "2026-06-02",
-    },
-    {
-      id: 3,
-      product: "Keyboard",
-      supplier: "Tech Distributors",
-      qty: 30,
-      price: "$25",
-      date: "2026-06-03",
-    },
-  ];
-
   return (
-    <div className="overflow-x-auto mt-6">
-
-      {/* ================= DESKTOP TABLE ================= */}
-      <table className="w-full hidden md:table text-sm text-slate-300">
-
-        <thead className="bg-[#1A2742] text-slate-300">
-          <tr>
-            <th className="p-4 text-left">{t("products")}</th>
-            <th className="p-4 text-left">{t("supplier")}</th>
-            <th className="p-4 text-left">{t("quantity")}</th>
-            <th className="p-4 text-left">{t("purchasePrice")}</th>
-            <th className="p-4 text-left">{t("date")}</th>
-            <th className="p-4 text-left">{t("actions")}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {stock.map((item) => (
-            <tr
-              key={item.id}
-              className="border-t border-slate-800 hover:bg-[#1A2742] transition"
-            >
-
-              <td className="p-4 font-medium text-white">
-                {item.product}
-              </td>
-
-              <td className="p-4 text-slate-400">
-                {item.supplier}
-              </td>
-
-              <td className="p-4 text-slate-300">
-                {item.qty}
-              </td>
-
-              <td className="p-4 text-slate-300">
-                {item.price}
-              </td>
-
-              <td className="p-4 text-slate-400">
-                {item.date}
-              </td>
-
-              <td className="p-4">
-                <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
-                  {t("delete")}
-                </button>
-              </td>
-
-            </tr>
-          ))}
-        </tbody>
-
-      </table>
+    <div className="w-full">
 
       {/* ================= MOBILE CARDS ================= */}
-      <div className="md:hidden space-y-4 p-2">
+      <div className="grid gap-4 md:hidden">
 
-        {stock.map((item) => (
+        {stockEntries.map((item) => (
           <div
             key={item.id}
-            className="bg-[#1A2742] border border-slate-800 rounded-2xl p-4"
+            className="bg-[#131C31] border border-slate-800 rounded-2xl p-4"
           >
 
-            <h2 className="font-bold text-white text-lg">
-              {item.product}
-            </h2>
+            {/* Header */}
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-white font-semibold">
+                  {item.product}
+                </p>
 
-            <p className="text-sm text-slate-400 mt-1">
-              {t("supplier")}: {item.supplier}
-            </p>
+                <p className="text-slate-400 text-sm">
+                  {item.id}
+                </p>
+              </div>
 
-            <p className="text-sm text-slate-300">
-              {t("quantity")}: {item.qty}
-            </p>
+              <span
+                className={`px-3 py-1 rounded-full text-xs ${
+                  item.status === "Completed"
+                    ? "bg-green-500/20 text-green-400"
+                    : "bg-yellow-500/20 text-yellow-400"
+                }`}
+              >
+                {item.status}
+              </span>
+            </div>
 
-            <p className="text-sm text-slate-300">
-              {t("Price")}: {item.price}
-            </p>
+            {/* Info */}
+            <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
 
-            <p className="text-sm text-slate-400">
-              {t("date")}: {item.date}
-            </p>
+              <p className="text-slate-400">
+                Supplier:{" "}
+                <span className="text-white">
+                  {item.supplier}
+                </span>
+              </p>
 
-            <div className="mt-4">
-              <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl w-full">
-                {t("delete")}
+              <p className="text-slate-400">
+                Warehouse:{" "}
+                <span className="text-white">
+                  {item.warehouse}
+                </span>
+              </p>
+
+              <p className="text-slate-400">
+                Qty:{" "}
+                <span className="text-white">
+                  {item.qty}
+                </span>
+              </p>
+
+              <p className="text-slate-400">
+                Cost:{" "}
+                <span className="text-white">
+                  {item.unitCost}
+                </span>
+              </p>
+
+              <p className="text-slate-400 col-span-2">
+                Total:{" "}
+                <span className="text-green-400">
+                  {item.total}
+                </span>
+              </p>
+
+            </div>
+
+            {/* Actions */}
+            <div className="flex gap-2 mt-4">
+
+              <button className="flex-1 bg-cyan-600 py-2 rounded-lg">
+                View
               </button>
+
+              <button className="flex-1 bg-indigo-600 py-2 rounded-lg">
+                Edit
+              </button>
+
             </div>
 
           </div>
         ))}
+
+      </div>
+
+      {/* ================= DESKTOP TABLE ================= */}
+      <div className="hidden md:block overflow-x-auto">
+
+        <table className="w-full text-sm">
+
+          <thead className="bg-[#1A2742]">
+            <tr>
+              <th className="p-4 text-left">GRN</th>
+              <th className="p-4 text-left">Product</th>
+              <th className="p-4 text-left">Supplier</th>
+              <th className="p-4 text-left">Warehouse</th>
+              <th className="p-4 text-left">Qty</th>
+              <th className="p-4 text-left">Cost</th>
+              <th className="p-4 text-left">Total</th>
+              <th className="p-4 text-left">Status</th>
+              <th className="p-4 text-left">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {stockEntries.map((item) => (
+              <tr
+                key={item.id}
+                className="border-t border-slate-800 hover:bg-[#1A2742]"
+              >
+                <td className="p-4">{item.id}</td>
+                <td className="p-4">{item.product}</td>
+                <td className="p-4">{item.supplier}</td>
+                <td className="p-4">{item.warehouse}</td>
+                <td className="p-4">{item.qty}</td>
+                <td className="p-4">{item.unitCost}</td>
+                <td className="p-4 text-green-400">{item.total}</td>
+
+                <td className="p-4">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs ${
+                      item.status === "Completed"
+                        ? "bg-green-500/20 text-green-400"
+                        : "bg-yellow-500/20 text-yellow-400"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </td>
+
+                <td className="p-4">
+                  <div className="flex gap-2">
+                    <button className="bg-cyan-600 px-3 py-1 rounded-lg">
+                      View
+                    </button>
+
+                    <button className="bg-indigo-600 px-3 py-1 rounded-lg">
+                      Edit
+                    </button>
+                  </div>
+                </td>
+
+              </tr>
+            ))}
+          </tbody>
+
+        </table>
 
       </div>
 

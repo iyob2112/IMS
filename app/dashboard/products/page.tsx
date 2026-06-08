@@ -4,6 +4,7 @@ import { useState } from "react";
 import ProductTable from "@/components/ProductTable";
 import AddProductModal from "@/components/AddProductModal";
 import { useTranslation } from "react-i18next";
+import  Link  from "next/link";
 
 export default function ProductsPage() {
   const { t } = useTranslation();
@@ -24,22 +25,79 @@ export default function ProductsPage() {
           </p>
         </div>
 
-        <div className="flex gap-3">
-          <input
-            type="text"
-            placeholder={t("searchProduct")}
-            className="bg-[#131C31] border border-slate-800 text-white px-4 py-2 rounded-xl outline-none"
-          />
+    <div className="flex flex-col lg:flex-row gap-3 mb-6">
 
-          <button
-            onClick={() => setOpen(true)}
-            className="bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-xl"
-          >
-            {t("addProduct")}
-          </button>
-        </div>
+  <input
+    type="text"
+    placeholder="Search product..."
+    className="flex-1 bg-[#131C31] border border-slate-800 rounded-xl px-4 py-3"
+  />
+
+  <select className="bg-[#131C31] border border-slate-800 rounded-xl px-4 py-3">
+    <option>All Categories</option>
+    <option>Electronics</option>
+    <option>Accessories</option>
+  </select>
+
+  <select className="bg-[#131C31] border border-slate-800 rounded-xl px-4 py-3">
+    <option>All Stock</option>
+    <option>In Stock</option>
+    <option>Low Stock</option>
+    <option>Out Of Stock</option>
+  </select>
+
+  <button className="bg-green-600 px-5 rounded-xl">
+    Export
+  </button>
+
+  <button className="bg-blue-600 px-5 rounded-xl">
+    Import
+  </button>
+<Link
+  href="/dashboard/products/analytics"
+  className="bg-cyan-600 hover:bg-cyan-700 px-5 py-2 rounded-xl flex items-center justify-center "
+>
+  Analytics
+</Link>
+  <button
+    onClick={() => setOpen(true)}
+    className="bg-indigo-600 px-5 rounded-xl"
+  >
+    Add Product
+  </button>
+
+</div>
       </div>
+<div className="grid md:grid-cols-2 xl:grid-cols-5 gap-6 mb-6">
 
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-5">
+    <p className="text-slate-400">Total Products</p>
+    <h2 className="text-3xl font-bold mt-2">150</h2>
+  </div>
+
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-5">
+    <p className="text-slate-400">Low Stock</p>
+    <h2 className="text-3xl font-bold text-yellow-400 mt-2">12</h2>
+  </div>
+
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-5">
+    <p className="text-slate-400">Out Of Stock</p>
+    <h2 className="text-3xl font-bold text-red-400 mt-2">4</h2>
+  </div>
+
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-5">
+    <p className="text-slate-400">Categories</p>
+    <h2 className="text-3xl font-bold text-cyan-400 mt-2">18</h2>
+  </div>
+
+  <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-5">
+    <p className="text-slate-400">Inventory Value</p>
+    <h2 className="text-3xl font-bold text-green-400 mt-2">
+      $45,000
+    </h2>
+  </div>
+
+</div>
       {/* Main Card (same as dashboard style) */}
       <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 shadow-lg">
 

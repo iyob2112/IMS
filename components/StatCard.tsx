@@ -1,21 +1,33 @@
-type Props = {
+interface Props {
   title: string;
   value: string;
-};
+  icon: React.ReactNode;
+}
 
 export default function StatCard({
   title,
   value,
+  icon,
 }: Props) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6">
-      <h3 className="text-slate-500 text-sm">
-        {title}
-      </h3>
+    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
 
-      <p className="text-3xl font-bold mt-2">
-        {value}
-      </p>
+      <div className="flex justify-between items-center">
+
+        <div>
+          <p className="text-slate-400">
+            {title}
+          </p>
+
+          <h2 className="text-4xl font-bold text-white mt-2">
+            {value}
+          </h2>
+        </div>
+
+        {icon}
+
+      </div>
+
     </div>
   );
 }

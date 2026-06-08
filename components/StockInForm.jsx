@@ -1,51 +1,77 @@
 "use client";
-import { useTranslation } from "react-i18next";
-export default function StockInForm() {
-  const { t } = useTranslation();
-  return (
-    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-4 sm:p-6 text-white">
 
-      <h2 className="text-xl font-bold mb-6">
-        {t("addStockIn")}
+export default function StockInForm() {
+  return (
+    <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+
+      <h2 className="text-2xl font-bold mb-6">
+        Receive Inventory
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
 
-        <select className="bg-[#1A2742] border border-slate-700 p-3 rounded-xl text-white outline-none">
-          <option>{t("selectProduct")}</option>
-          <option>Laptop</option>
-          <option>Mouse</option>
-          <option>Keyboard</option>
+        <select className="bg-[#0B1120] p-3 rounded-xl">
+          <option>Select Supplier</option>
         </select>
 
-        <select className="bg-[#1A2742] border border-slate-700 p-3 rounded-xl text-white outline-none">
-                   <option>{t("selectSupplier")}</option>
-          <option>Tech Distributors</option>
-          <option>Global Electronics</option>
+        <select className="bg-[#0B1120] p-3 rounded-xl">
+          <option>Select Warehouse</option>
+        </select>
+
+        <select className="bg-[#0B1120] p-3 rounded-xl">
+          <option>Select Product</option>
         </select>
 
         <input
-          type="number"
-          placeholder= {t("quantity")}
-          className="bg-[#1A2742] border border-slate-700 p-3 rounded-xl text-white outline-none"
+          placeholder="Batch Number"
+          className="bg-[#0B1120] p-3 rounded-xl"
         />
 
         <input
+          placeholder="Barcode"
+          className="bg-[#0B1120] p-3 rounded-xl"
+        />
+
+        <input
+          placeholder="Quantity"
           type="number"
-          placeholder={t("purchasePrice")}
-          className="bg-[#1A2742] border border-slate-700 p-3 rounded-xl text-white outline-none"
+          className="bg-[#0B1120] p-3 rounded-xl"
+        />
+
+        <input
+          placeholder="Unit Cost"
+          className="bg-[#0B1120] p-3 rounded-xl"
         />
 
         <input
           type="date"
-          className="bg-[#1A2742] border border-slate-700 p-3 rounded-xl text-white outline-none sm:col-span-2"
+          className="bg-[#0B1120] p-3 rounded-xl"
+        />
+
+        <input
+          type="date"
+          className="bg-[#0B1120] p-3 rounded-xl"
         />
 
       </div>
 
-      <button className="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl w-full sm:w-auto">
-        {t("saveStockIn")}
-      </button>
+      <textarea
+        placeholder="Notes"
+        rows={4}
+        className="bg-[#0B1120] p-3 rounded-xl w-full mt-4"
+      />
+
+      <div className="flex gap-3 mt-6">
+
+        <button className="bg-cyan-600 px-6 py-3 rounded-xl">
+          Receive Stock
+        </button>
+
+        <button className="bg-slate-700 px-6 py-3 rounded-xl">
+          Save Draft
+        </button>
+
+      </div>
 
     </div>
   );

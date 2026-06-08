@@ -1,30 +1,29 @@
 import { useTranslation } from "react-i18next";
-
+import Link from "next/link";
 export default function SupplierTable() {
   const { t } = useTranslation();
-  const suppliers = [
-    {
-      id: 1,
-      name: "Tech Distributors Ltd",
-      phone: "+251911223344",
-      address: "Mekelle, Tigray",
-      contact: "Abebe Tesfaye",
-    },
-    {
-      id: 2,
-      name: "Global Electronics",
-      phone: "+251922334455",
-      address: "Addis Ababa",
-      contact: "Sara Mekonnen",
-    },
-    {
-      id: 3,
-      name: "Office Supplies Co",
-      phone: "+251933445566",
-      address: "Hawassa",
-      contact: "Kebede Alemu",
-    },
-  ];
+ const suppliers = [
+  {
+    id: 1,
+    name: "Tech Distributors Ltd",
+    contact: "Abebe Tesfaye",
+    phone: "+251911223344",
+    address: "Mekelle",
+    purchases: "$12,500",
+    balance: "$2,300",
+    status: "Active",
+  },
+  {
+    id: 2,
+    name: "Global Electronics",
+    contact: "Sara Mekonnen",
+    phone: "+251922334455",
+    address: "Addis Ababa",
+    purchases: "$8,400",
+    balance: "$0",
+    status: "Active",
+  },
+];
 
   return (
     <div className="overflow-x-auto">
@@ -67,7 +66,12 @@ export default function SupplierTable() {
 
               <td className="p-4">
                 <div className="flex gap-2">
-
+<Link
+  href={`/dashboard/suppliers/${s.id}`}
+  className="bg-cyan-600 px-3 py-1 rounded-lg text-white"
+>
+  View
+</Link>
                   <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg">
                     {t("edit")}
                   </button>
