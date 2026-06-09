@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { Eye, Pencil, Trash2, Barcode } from "lucide-react";
 import { products } from "@/data/products";
-
+import type { Product } from "@/types/product";
+import ProductDetailsPage from "@/app/dashboard/products/[id]/page";
 export default function ProductTable() {
   const [selected, setSelected] = useState<number[]>([]);
 
@@ -15,6 +16,10 @@ export default function ProductTable() {
       setSelected([...selected, id]);
     }
   };
+  const [selectedProduct, setSelectedProduct] =
+    useState<Product | null>(null);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDetailsPage, setOpenDetailsPage] = useState(false);
 
   return (
     <div className="w-full">
@@ -27,8 +32,8 @@ export default function ProductTable() {
             product.stock === 0
               ? "Out Of Stock"
               : product.stock < 10
-              ? "Low Stock"
-              : "In Stock";
+                ? "Low Stock"
+                : "In Stock";
 
           return (
             <div
@@ -99,13 +104,12 @@ export default function ProductTable() {
               {/* Status */}
               <div className="mt-3">
                 <span
-                  className={`px-3 py-1 rounded-full text-xs ${
-                    status === "In Stock"
+                  className={`px-3 py-1 rounded-full text-xs ${status === "In Stock"
                       ? "bg-green-500/20 text-green-400"
                       : status === "Low Stock"
-                      ? "bg-yellow-500/20 text-yellow-400"
-                      : "bg-red-500/20 text-red-400"
-                  }`}
+                        ? "bg-yellow-500/20 text-yellow-400"
+                        : "bg-red-500/20 text-red-400"
+                    }`}
                 >
                   {status}
                 </span>
@@ -114,22 +118,29 @@ export default function ProductTable() {
               {/* Actions */}
               <div className="flex gap-2 mt-4  ">
 
-                <Link
-                  href={`/dashboard/products/${product.id}`}
-                  className="bg-slate-800 p-2 rounded-lg flex-1 text-center"
+                <button
+                  onClick={() => {
+                    setOpenDetailsPage(true);
+                  }}
+                  className="bg-slate-800 p-2 rounded-lg"
                 >
                   <Eye size={16} />
-                </Link>
+                </button>
 
-                <button className="bg-slate-800 p-2 rounded-lg flex-1">
+                <button
+                  onClick={() => {
+                    setOpenEdit(true);
+
+                    setSelectedProduct(product);
+                  }}
+                  className="bg-slate-800 p-2 rounded-lg"
+                >
                   <Pencil size={16} />
                 </button>
 
-                <button className="bg-slate-800 p-2 rounded-lg flex-1">
-                  <Barcode size={16} />
-                </button>
 
-                <button className="bg-red-500/20 text-red-400 p-2 rounded-lg flex-1">
+
+                <button className="bg-red-500/20 text-red-400 p-2 rounded-lg ">
                   <Trash2 size={16} />
                 </button>
 
@@ -171,8 +182,8 @@ export default function ProductTable() {
                   product.stock === 0
                     ? "Out Of Stock"
                     : product.stock < 10
-                    ? "Low Stock"
-                    : "In Stock";
+                      ? "Low Stock"
+                      : "In Stock";
 
                 return (
                   <tr
@@ -222,13 +233,12 @@ export default function ProductTable() {
 
                     <td className="p-4">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs ${
-                          status === "In Stock"
+                        className={`px-3 py-1 rounded-full text-xs ${status === "In Stock"
                             ? "bg-green-500/20 text-green-400"
                             : status === "Low Stock"
-                            ? "bg-yellow-500/20 text-yellow-400"
-                            : "bg-red-500/20 text-red-400"
-                        }`}
+                              ? "bg-yellow-500/20 text-yellow-400"
+                              : "bg-red-500/20 text-red-400"
+                          }`}
                       >
                         {status}
                       </span>
@@ -237,20 +247,29 @@ export default function ProductTable() {
                     <td className="p-4 ">
                       <div className="flex gap-2">
 
-                        <Link
-                          href={`/dashboard/products/${product.id}`}
+                        <button
+                          onClick={() => {
+                            setOpenDetailsPage(true);
+                          }}
                           className="bg-slate-800 p-2 rounded-lg"
                         >
                           <Eye size={16} />
-                        </Link>
+                        </button>
 
-                        <button className="bg-slate-800 p-2 rounded-lg">
+                        <button
+                          onClick={() => {
+                            setOpenEdit(true);
+
+                            setSelectedProduct(product);
+                          }}
+                          className="bg-slate-800 p-2 rounded-lg"
+                        >
                           <Pencil size={16} />
                         </button>
 
-                        <button className="bg-slate-800 p-2 rounded-lg">
-                          <Barcode size={16} />
-                        </button>
+
+
+
 
                         <button className="bg-red-500/20 text-red-400 p-2 rounded-lg">
                           <Trash2 size={16} />
@@ -265,11 +284,113 @@ export default function ProductTable() {
             </tbody>
 
           </table>
-
         </div>
 
       </div>
+          {openEdit && selectedProduct && (
+            <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
 
+              <div className="bg-[#131C31] w-full max-w-2xl rounded-3xl p-6 border border-slate-700">
+
+                {/* Header */}
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-xl font-bold text-white">
+                    Edit Product
+                  </h2>
+
+                  <button
+                    onClick={() => setOpenEdit(false)}
+                    className="text-slate-400"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Form */}
+                <div className="space-y-4">
+
+                  <input
+                    className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+                    value={selectedProduct.name}
+                    onChange={(e) =>
+                      setSelectedProduct({
+                        ...selectedProduct,
+                        name: e.target.value,
+                      })
+                    }
+                    placeholder="Product Name"
+                  />
+
+                  <input
+                    className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+                    value={selectedProduct.sku}
+                    onChange={(e) =>
+                      setSelectedProduct({
+                        ...selectedProduct,
+                        sku: e.target.value,
+                      })
+                    }
+                    placeholder="SKU"
+                  />
+
+                  <input
+                    type="number"
+                    className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+                    value={selectedProduct.stock}
+                    onChange={(e) =>
+                      setSelectedProduct({
+                        ...selectedProduct,
+                        stock: Number(e.target.value),
+                      })
+                    }
+                    placeholder="Stock"
+                  />
+
+                  <input
+                    type="number"
+                    className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+                    value={selectedProduct.sellingPrice}
+                    onChange={(e) =>
+                      setSelectedProduct({
+                        ...selectedProduct,
+                        sellingPrice: Number(e.target.value),
+                      })
+                    }
+                    placeholder="Selling Price"
+                  />
+
+                  {/* Buttons */}
+                  <div className="flex gap-3 pt-4">
+
+                    <button
+                      onClick={() => {
+                        console.log("Updated Product:", selectedProduct);
+                        setOpenEdit(false);
+                      }}
+                      className="flex-1 bg-cyan-600 hover:bg-cyan-700 p-3 rounded-xl"
+                    >
+                      Save Changes
+                    </button>
+
+                    <button
+                      onClick={() => setOpenEdit(false)}
+                      className="flex-1 bg-slate-800 p-3 rounded-xl"
+                    >
+                      Cancel
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          )}
+
+      <ProductDetailsPage
+        open={openDetailsPage}
+        onClose={() => setOpenDetailsPage(false)}
+      />
     </div>
   );
 }

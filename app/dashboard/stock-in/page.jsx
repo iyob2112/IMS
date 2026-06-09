@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import {
   PackagePlus,
   DollarSign,
@@ -9,8 +9,9 @@ import {
 import Link from "next/link";
 import StockInForm from "@/components/StockInForm";
 import StockTable from "@/components/StockTable";
-
+import AddStockModal from "@/components/inventory/AddStockModal";
 export default function StockInPage() {
+   const [open, setOpen] = useState(false);
   return (
     <div className="space-y-6 pt-10 p-3 text-white min-h-screen">
 
@@ -119,6 +120,7 @@ export default function StockInPage() {
 
       <Link
         href="/dashboard/stock-in"
+          onClick={() => setOpen(true)}
         className="min-w-[140px] bg-cyan-600 p-4 rounded-2xl text-center whitespace-nowrap"
       >
         Add Stock
@@ -183,6 +185,11 @@ export default function StockInPage() {
 
       </div>
 
+      <AddStockModal
+        open={open}
+        onClose={() => setOpen(false)}
+      />
     </div>
+    
   );
 }

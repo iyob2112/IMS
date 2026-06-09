@@ -54,7 +54,12 @@ export default function AddStockModal({
             placeholder="Price"
             className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700 text-white"
           />
-
+<select className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700 text-white">
+  <option value="">Select Warehouse</option>
+  <option value="main">Main Warehouse</option>
+  <option value="branch1">Branch 1</option>
+  <option value="branch2">Branch 2</option>
+</select>
           <button
             type="button"
             className="w-full bg-cyan-600 hover:bg-cyan-700 p-3 rounded-xl text-white"

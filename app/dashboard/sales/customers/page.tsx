@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import AddCustomerModal from "@/components/customers/AddCustomerModal";
 import {
   Users,
   Plus,
@@ -46,7 +48,7 @@ export default function CustomersPage() {
       status: "Inactive",
     },
   ];
-
+  const [open, setOpen] = useState(false);
   return (
     <div className="min-h-screen bg-[#0B1120] text-white p-3 pt-10 space-y-6">
 
@@ -64,7 +66,7 @@ export default function CustomersPage() {
           </p>
         </div>
 
-        <button className="bg-cyan-600 px-6 py-3 rounded-xl flex items-center gap-2">
+        <button onClick={() => setOpen(true)} className="bg-cyan-600 px-6 py-3 rounded-xl flex items-center gap-2">
           <Plus size={18} />
           Add Customer
         </button>
@@ -264,7 +266,10 @@ export default function CustomersPage() {
         ))}
 
       </div>
-
+  <AddCustomerModal
+        open={open}
+        onClose={() => setOpen(false)}
+      />
     </div>
   );
 }

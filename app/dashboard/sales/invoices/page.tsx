@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import {
   FileText,
   Search,
@@ -8,6 +8,7 @@ import {
   Download,
   CheckCircle,
   Clock,
+
 } from "lucide-react";
 
 export default function InvoicesPage() {
@@ -54,10 +55,15 @@ export default function InvoicesPage() {
             Manage customer invoices and payments
           </p>
         </div>
-
-        <button className="bg-cyan-600 px-6 py-3 rounded-xl">
+ <Link
+                      href="/dashboard/sales/invoices/create"
+                      className="bg-cyan-600 px-6 py-3 rounded-xl"
+                    >
+                             Create Invoice
+                    </Link>
+        {/* <button className="bg-cyan-600 px-6 py-3 rounded-xl">
           Create Invoice
-        </button>
+        </button> */}
 
       </div>
 
@@ -181,9 +187,15 @@ export default function InvoicesPage() {
 
                   <div className="flex gap-2">
 
-                    <button className="bg-cyan-600 p-2 rounded-lg">
+ <Link
+                      href="/dashboard/sales/invoices/details"
+                      className="bg-cyan-600 p-2 rounded-lg"
+                    >
+                    <Eye size={16} />
+                    </Link>
+                    {/* <button className="bg-cyan-600 p-2 rounded-lg">
                       <Eye size={16} />
-                    </button>
+                    </button> */}
 
                     <button className="bg-green-600 p-2 rounded-lg">
                       <Printer size={16} />

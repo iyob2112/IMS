@@ -38,16 +38,16 @@ export default function SalesAnalyticsPage() {
 
         <div className="flex gap-3">
 
-          <button className="bg-[#131C31] px-4 py-3 rounded-xl border border-slate-700">
+          <button className="bg-[#131C31] px-4 py-3 rounded-xl border border-slate-700 h-14">
             <Calendar size={18} />
           </button>
 
-          <button className="bg-green-600 px-5 py-3 rounded-xl flex items-center gap-2">
+          <button className="bg-green-600 px-5 py-3 rounded-xl flex items-center gap-2 h-14">
             <Download size={18} />
             Export Excel
           </button>
 
-          <button className="bg-red-600 px-5 py-3 rounded-xl flex items-center gap-2">
+          <button className="bg-red-600 px-5 py-3 rounded-xl flex items-center gap-2 h-14">
             <Download size={18} />
             Export PDF
           </button>

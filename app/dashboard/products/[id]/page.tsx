@@ -8,24 +8,34 @@ import {
   ShoppingCart,
   Truck,
 } from "lucide-react";
+interface Props {
+  open: boolean;
+  onClose: () => void;
+}
 
-export default function ProductDetailsPage() {
+export default function ProductDetailsPage({ open, onClose }: Props) {
+   if (!open) return null;
   return (
-    <div className="space-y-6 pt-10 p-3 text-white ">
-
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+<div className="bg-[#0B1120] w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-800 p-6 relative">
       {/* Header */}
-      <div>
-        <h1 className="text-4xl font-bold text-white">
+      <div className=" mb-6">
+        <h1 className="text-4xl font-bold text-white ">
           Gaming Laptop
         </h1>
 
-        <p className="text-slate-400">
+        <p className="text-slate-400 mt-2">
           Product Details & Analytics
         </p>
-      </div>
+<button
+  onClick={onClose}
+  className="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"
+>
+  ✕
+</button>      </div>
 
       {/* Product Info */}
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-6 ">
 
         {/* Product Card */}
         <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
@@ -158,7 +168,7 @@ export default function ProductDetailsPage() {
       </div>
 
       {/* Stock History */}
-      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 mt-6">
 
         <h2 className="text-2xl font-bold text-white mb-6">
           Stock History
@@ -191,7 +201,7 @@ export default function ProductDetailsPage() {
       </div>
 
       {/* Purchase History */}
-      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 mt-6">
 
         <h2 className="text-2xl font-bold text-white mb-6">
           Purchase History
@@ -245,5 +255,6 @@ export default function ProductDetailsPage() {
 
       </div>
     </div>
+</div>
   );
 }

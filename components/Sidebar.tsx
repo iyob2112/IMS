@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, CreditCard, RotateCcw } from "lucide-react";
 import {
   LayoutDashboard,
   Box,
@@ -178,41 +178,41 @@ const menu = [
     ],
   },
 
-  {
-    title: "SALES",
-    items: [
-      {
-        name: "Sales",
-        icon: ShoppingCart,
-        children: [
-          {
-            name: "Overview",
-            path: "/dashboard/sales",
-          },
-          {
-            name: "Customers",
-            path: "/dashboard/sales/customers",
-          },
-          {
-            name: "Invoices",
-            path: "/dashboard/sales/invoices",
-          },
-          {
-            name: "Payments",
-            path: "/dashboard/sales/payments",
-          },
-          {
-            name: "Returns",
-            path: "/dashboard/sales/returns",
-          },
-          {
-            name: "Analytics",
-            path: "/dashboard/sales/analytics",
-          },
-        ],
-      },
-    ],
-  },
+{
+  title: "SALES",
+  items: [
+    {
+      name: t("salesOverview"),
+      path: "/dashboard/sales",
+      icon: ShoppingCart,
+    },
+    {
+      name: t("customers"),
+      path: "/dashboard/sales/customers",
+      icon: Users,
+    },
+    {
+      name: t("invoices"),
+      path: "/dashboard/sales/invoices",
+      icon: FileText,
+    },
+    {
+      name: t("payments"),
+      path: "/dashboard/sales/payments",
+      icon: CreditCard,
+    },
+    {
+      name: t("returns"),
+      path: "/dashboard/sales/returns",
+      icon: RotateCcw,
+    },
+    {
+      name: t("salesAnalytics"),
+      path: "/dashboard/sales/analytics",
+      icon: BarChart3,
+    },
+  ],
+},
 
   {
     title: "SYSTEM",
@@ -235,7 +235,7 @@ const menu = [
     ],
   },
 ];
-const [openMenu, setOpenMenu] = useState<string | null>(null);
+
   return (
     <aside className="w-72 bg-slate-950 text-white h-screen p-6 pt-20 fixed overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700">
       {/* Logo */}
@@ -249,7 +249,7 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
       </div>
 
       {/* Menu */}
-  <nav className="space-y-6">
+ <nav className="space-y-6">
   {menu.map((group) => (
     <div key={group.title}>
       <p className="px-4 mb-2 text-xs font-semibold text-slate-500 uppercase">
@@ -259,63 +259,6 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
       <div className="space-y-2">
         {group.items.map((item) => {
           const Icon = item.icon;
-
-          if ("children" in item) {
-            const isOpen =
-  openMenu === item.name ||
-  item.children.some((child) =>
-    pathname.startsWith(child.path)
-  );
-
-            return (
-              <div key={item.name}>
-                <button
-                  onClick={() =>
-                    setOpenMenu(
-                      isOpen ? null : item.name
-                    )
-                  }
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-slate-800 text-slate-300"
-                >
-                  <div className="flex items-center gap-3">
-                    <Icon size={18} />
-                    <span>{item.name}</span>
-                  </div>
-
-                  {isOpen ? (
-                    <ChevronDown size={16} />
-                  ) : (
-                    <ChevronRight size={16} />
-                  )}
-                </button>
-
-                {isOpen && (
-                  <div className="ml-8 mt-2 space-y-1">
-                    {item.children.map((child) => {
-                      const active =
-  pathname === child.path ||
-  pathname.startsWith(child.path + "/");
-
-                      return (
-                        <Link
-                          key={child.path}
-                          href={child.path}
-                          onClick={onNavigate}
-                          className={`block px-4 py-2 rounded-lg text-sm ${
-                            active
-                              ? "bg-blue-600 text-white"
-                              : "text-slate-400 hover:bg-slate-800"
-                          }`}
-                        >
-                          {child.name}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            );
-          }
 
           const active =
             pathname === item.path;
