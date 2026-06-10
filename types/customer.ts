@@ -5,6 +5,7 @@ export interface customer {
   phone: string;
   purchases: string;
   due: string;
+  totalSpent:string;
   delivery: "Delivery" | "Pending";
   status: "Active" | "Inactive";
 }

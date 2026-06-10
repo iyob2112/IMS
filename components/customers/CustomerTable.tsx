@@ -1,10 +1,10 @@
 "use client";
 
-import { Customer } from "@/types/customer";
+import { customer } from "@/types/customer";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 
 interface Props {
-  customers: Customer[];
+  customers: customer[];
 }
 
 export default function CustomerTable({
