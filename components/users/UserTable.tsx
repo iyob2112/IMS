@@ -5,9 +5,11 @@ import { Eye, Pencil, Trash2 } from "lucide-react";
 
 interface Props {
   users: User[];
+    onView: (user: User) => void;
+  onEdit: (user: User) => void;
 }
 
-export default function UserTable({ users }: Props) {
+export default function UserTable({ users, onView, onEdit }: Props){
   return (
     <div className="w-full">
 
@@ -54,14 +56,19 @@ export default function UserTable({ users }: Props) {
 
             <div className="flex gap-2 mt-4">
 
-              <button className="flex-1 bg-slate-800 py-2 rounded-lg">
-                <Eye size={16} className="mx-auto" />
-              </button>
+           <button
+  onClick={() => onView(user)}
+  className="flex-1 bg-slate-800 py-2 rounded-lg"
+>
+  <Eye size={16} className="mx-auto" />
+</button>
 
-              <button className="flex-1 bg-slate-800 py-2 rounded-lg">
-                <Pencil size={16} className="mx-auto" />
-              </button>
-
+<button
+  onClick={() => onEdit(user)}
+  className="flex-1 bg-slate-800 py-2 rounded-lg"
+>
+  <Pencil size={16} className="mx-auto" />
+</button>
               <button className="flex-1 bg-red-500/20 text-red-400 py-2 rounded-lg">
                 <Trash2 size={16} className="mx-auto" />
               </button>
@@ -123,13 +130,19 @@ export default function UserTable({ users }: Props) {
                 <td className="p-4">
                   <div className="flex gap-2">
 
-                    <button className="p-2 rounded-lg bg-slate-800">
-                      <Eye size={16} />
-                    </button>
+             <button
+  onClick={() => onView(user)}
+  className="p-2 rounded-lg bg-slate-800"
+>
+  <Eye size={16} />
+</button>
 
-                    <button className="p-2 rounded-lg bg-slate-800">
-                      <Pencil size={16} />
-                    </button>
+<button
+  onClick={() => onEdit(user)}
+  className="p-2 rounded-lg bg-slate-800"
+>
+  <Pencil size={16} />
+</button>
 
                     <button className="p-2 rounded-lg bg-red-500/20 text-red-400">
                       <Trash2 size={16} />

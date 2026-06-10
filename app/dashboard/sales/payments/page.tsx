@@ -9,7 +9,7 @@ import {
   Receipt,
   Eye,
 } from "lucide-react";
-
+import { useState } from "react";
 export default function PaymentsPage() {
   const payments = [
     {
@@ -40,7 +40,7 @@ export default function PaymentsPage() {
       date: "2026-06-06",
     },
   ];
-
+const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
   return (
     <div className="min-h-screen bg-[#0B1120] text-white p-3 pt-10 space-y-6">
 
@@ -107,7 +107,7 @@ export default function PaymentsPage() {
         </div>
 
       </div>
-
+{/* Desktop View */}
       {/* Table */}
       <div className="bg-[#131C31] rounded-3xl overflow-hidden">
 
@@ -163,9 +163,12 @@ export default function PaymentsPage() {
                 <td className="p-4">
                   <div className="flex gap-2">
 
-                    <button className="bg-cyan-600 p-2 rounded-lg">
-                      <Eye size={16} />
-                    </button>
+              <button
+  onClick={() => setSelectedPayment(payment)}
+  className="bg-cyan-600 p-2 rounded-lg"
+>
+  <Eye size={16} />
+</button>
 
                     <button className="bg-green-600 p-2 rounded-lg">
                       <Receipt size={16} />
@@ -179,9 +182,94 @@ export default function PaymentsPage() {
           </tbody>
 
         </table>
+      
+
+      </div>
+      {/* Mobile View */}
+<div className="lg:hidden space-y-4">
+  {payments.map((payment) => (
+    <div
+      key={payment.id}
+      className="bg-[#131C31] border border-slate-800 rounded-2xl p-4 space-y-2"
+    >
+      {/* Top row */}
+      <div className="flex justify-between items-center">
+        <h2 className="font-semibold">{payment.id}</h2>
+
+        <span
+          className={`text-xs px-3 py-1 rounded-full ${
+            payment.status === "Paid"
+              ? "bg-green-500/20 text-green-400"
+              : payment.status === "Partial"
+              ? "bg-yellow-500/20 text-yellow-400"
+              : "bg-red-500/20 text-red-400"
+          }`}
+        >
+          {payment.status}
+        </span>
+      </div>
+
+      <p className="text-slate-400 text-sm">{payment.customer}</p>
+
+      <div className="flex justify-between text-sm">
+        <span>Invoice: {payment.invoice}</span>
+        <span className="text-green-400">{payment.amount}</span>
+      </div>
+
+      <div className="flex justify-between text-xs text-slate-400">
+        <span>{payment.method}</span>
+        <span>{payment.date}</span>
+      </div>
+
+      {/* Actions */}
+      <div className="flex gap-2 pt-2">
+        <button
+          onClick={() => setSelectedPayment(payment)}
+          className="bg-cyan-600 p-2 rounded-lg"
+        >
+          <Eye size={16} />
+        </button>
+
+        <button className="bg-green-600 p-2 rounded-lg">
+          <Receipt size={16} />
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+{selectedPayment && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+    
+    <div className="bg-[#131C31] w-full max-w-lg rounded-2xl p-6 border border-slate-800 relative">
+
+      {/* Close button */}
+      <button
+        onClick={() => setSelectedPayment(null)}
+        className="absolute top-3 right-3 text-slate-400 hover:text-white"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-xl font-bold mb-4">
+        Payment Details
+      </h2>
+
+      <div className="space-y-3 text-slate-300">
+
+        <p><span className="text-slate-400">Payment ID:</span> {selectedPayment.id}</p>
+        <p><span className="text-slate-400">Customer:</span> {selectedPayment.customer}</p>
+        <p><span className="text-slate-400">Invoice:</span> {selectedPayment.invoice}</p>
+        <p><span className="text-slate-400">Amount:</span> {selectedPayment.amount}</p>
+        <p><span className="text-slate-400">Method:</span> {selectedPayment.method}</p>
+        <p><span className="text-slate-400">Status:</span> {selectedPayment.status}</p>
+        <p><span className="text-slate-400">Date:</span> {selectedPayment.date}</p>
 
       </div>
 
+    </div>
+
+  </div>
+)}
     </div>
   );
 }

@@ -1,6 +1,14 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { useState } from "react";
+import CategoryDetailsPage from "@/app/dashboard/categories/details/page";
+
 export default function CategoryTable() {
+const [selectedCategory, setSelectedCategory] =useState(false);
+  
+const [openEdit, setOpenEdit] = useState(false);
+const [openView, setOpenView] = useState(false);
+
   const { t } = useTranslation();
   const categories = [
   {
@@ -86,16 +94,24 @@ export default function CategoryTable() {
       <td className="p-4">
         <div className="flex gap-2">
 
-       <Link
-  href="/dashboard/categories/details"
+      <button
+  onClick={() => {
+  setOpenView(true);
+  }}
   className="bg-cyan-600 px-3 py-1 rounded-lg text-white"
 >
   View
-</Link>
+</button>
 
-          <button className="bg-indigo-600 px-3 py-1 rounded-lg">
-            Edit
-          </button>
+       <button
+  onClick={() => {
+    setSelectedCategory(cat);
+    setOpenEdit(true);
+  }}
+  className="bg-indigo-600 px-3 py-1 rounded-lg"
+>
+  Edit
+</button>
 
           <button className="bg-red-600 px-3 py-1 rounded-lg">
             Delete
@@ -169,13 +185,25 @@ export default function CategoryTable() {
 
       <div className="flex gap-2 mt-4">
 
-        <button className="flex-1 bg-cyan-600 py-2 rounded-xl">
-          View
-        </button>
+      <button
+  onClick={() => {
 
-        <button className="flex-1 bg-indigo-600 py-2 rounded-xl">
-          Edit
-        </button>
+    setOpenView(true);
+  }}
+  className="flex-1 bg-cyan-600 py-2 rounded-xl"
+>
+  View
+</button>
+
+      <button
+  onClick={() => {
+    setSelectedCategory(cat);
+    setOpenEdit(true);
+  }}
+  className="flex-1 bg-indigo-600 py-2 rounded-xl"
+>
+  Edit
+</button>
 
         <button className="flex-1 bg-red-600 py-2 rounded-xl">
           Delete
@@ -186,7 +214,74 @@ export default function CategoryTable() {
   ))}
 
 </div>
+{openEdit && selectedCategory && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
 
+    <div className="bg-[#131C31] w-full max-w-xl rounded-3xl p-6 relative">
+
+      <button
+        onClick={() => setOpenEdit(false)}
+        className="absolute top-3 right-3 text-slate-400"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-bold text-white mb-4">
+        Edit Category
+      </h2>
+
+      <div className="space-y-4">
+
+        <input
+          className="w-full p-3 rounded-xl bg-[#0B1120] text-white border border-slate-700"
+          value={selectedCategory.name}
+          onChange={(e) =>
+            setSelectedCategory({
+              ...selectedCategory,
+              name: e.target.value,
+            })
+          }
+        />
+
+        <input
+          className="w-full p-3 rounded-xl bg-[#0B1120] text-white border border-slate-700"
+          value={selectedCategory.description}
+          onChange={(e) =>
+            setSelectedCategory({
+              ...selectedCategory,
+              description: e.target.value,
+            })
+          }
+        />
+
+        <div className="flex gap-3 pt-3">
+
+          <button
+            onClick={() => {
+              console.log("Updated:", selectedCategory);
+              setOpenEdit(false);
+            }}
+            className="flex-1 bg-indigo-600 p-3 rounded-xl"
+          >
+            Save
+          </button>
+
+          <button
+            onClick={() => setOpenEdit(false)}
+            className="flex-1 bg-slate-800 p-3 rounded-xl"
+          >
+            Cancel
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
+<CategoryDetailsPage open={openView} onClose={() => setOpenView(false)} />
     </div>
   );
 }

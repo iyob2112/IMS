@@ -1,9 +1,10 @@
-export interface Customer {
+export interface customer {
   id: number;
   name: string;
   email: string;
   phone: string;
-  purchases: number;
-  totalSpent: number;
+  purchases: string;
+  due: string;
+  delivery: "Delivery" | "Pending";
   status: "Active" | "Inactive";
 }

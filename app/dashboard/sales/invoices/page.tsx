@@ -10,7 +10,9 @@ import {
   Clock,
 
 } from "lucide-react";
-
+import { useState } from "react";
+import InvoiceDetailsPage from "@/app/dashboard/sales/invoices/details/page";
+import CreateInvoicePage from "@/app/dashboard/sales/invoices/create/page";
 export default function InvoicesPage() {
   const invoices = [
     {
@@ -38,7 +40,8 @@ export default function InvoicesPage() {
       date: "2026-06-05",
     },
   ];
-
+const [viewOpen, setViewOpen] = useState(false);
+const [createOpen, setCreateOpen] = useState(false);
   return (
     <div className="min-h-screen bg-[#0B1120] text-white p-3 pt-10 space-y-6">
 
@@ -55,15 +58,21 @@ export default function InvoicesPage() {
             Manage customer invoices and payments
           </p>
         </div>
- <Link
+ {/* <Link
                       href="/dashboard/sales/invoices/create"
                       className="bg-cyan-600 px-6 py-3 rounded-xl"
                     >
                              Create Invoice
-                    </Link>
-        {/* <button className="bg-cyan-600 px-6 py-3 rounded-xl">
+                    </Link> */}
+
+        <button 
+          onClick={() => {
+
+    setCreateOpen(true);
+  }}
+        className="bg-cyan-600 px-6 py-3 rounded-xl">
           Create Invoice
-        </button> */}
+        </button>
 
       </div>
 
@@ -118,106 +127,122 @@ export default function InvoicesPage() {
       </div>
 
       {/* Invoice Table */}
-      <div className="bg-[#131C31] rounded-3xl overflow-hidden">
+  {/* Desktop Table */}
+<div className="bg-[#131C31] rounded-3xl overflow-hidden hidden lg:block">
+  <table className="w-full">
+    <thead className="bg-[#1A2742]">
+      <tr>
+        <th className="p-4 text-left">Invoice</th>
+        <th className="p-4 text-left">Customer</th>
+        <th className="p-4 text-left">Amount</th>
+        <th className="p-4 text-left">Paid</th>
+        <th className="p-4 text-left">Status</th>
+        <th className="p-4 text-left">Date</th>
+        <th className="p-4 text-left">Actions</th>
+      </tr>
+    </thead>
 
-        <table className="w-full hidden lg:table">
+    <tbody>
+      {invoices.map((invoice) => (
+        <tr key={invoice.id} className="border-t border-slate-800">
+          <td className="p-4 font-semibold">{invoice.id}</td>
+          <td className="p-4">{invoice.customer}</td>
+          <td className="p-4 text-green-400">{invoice.total}</td>
+          <td className="p-4">{invoice.paid}</td>
+          <td className="p-4">{invoice.status}</td>
+          <td className="p-4">{invoice.date}</td>
+          <td className="p-4">
+            <div className="flex gap-2">
+              {/* <Link href="/dashboard/sales/invoices/details" className="bg-cyan-600 p-2 rounded-lg">
+                <Eye size={16} />
+              </Link> */}
+         <button
+  onClick={() => {
 
-          <thead className="bg-[#1A2742]">
-            <tr>
-              <th className="p-4 text-left">Invoice</th>
-              <th className="p-4 text-left">Customer</th>
-              <th className="p-4 text-left">Amount</th>
-              <th className="p-4 text-left">Paid</th>
-              <th className="p-4 text-left">Status</th>
-              <th className="p-4 text-left">Date</th>
-              <th className="p-4 text-left">Actions</th>
-            </tr>
-          </thead>
+    setViewOpen(true);
+  }}
+  className="bg-cyan-600 p-2 rounded-lg"
+>
+  <Eye size={16} />
+</button>
+              <button className="bg-green-600 p-2 rounded-lg">
+                <Printer size={16} />
+              </button>
 
-          <tbody>
+              <button className="bg-orange-600 p-2 rounded-lg">
+                <Download size={16} />
+              </button>
+            </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+{/* Mobile Cards */}
+<div className="lg:hidden space-y-4">
+  {invoices.map((invoice) => (
+    <div
+      key={invoice.id}
+      className="bg-[#131C31] p-4 rounded-2xl border border-slate-800"
+    >
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="font-semibold">{invoice.id}</h2>
 
-            {invoices.map((invoice) => (
-              <tr
-                key={invoice.id}
-                className="border-t border-slate-800"
-              >
-                <td className="p-4 font-semibold">
-                  {invoice.id}
-                </td>
-
-                <td className="p-4">
-                  {invoice.customer}
-                </td>
-
-                <td className="p-4 text-green-400">
-                  {invoice.total}
-                </td>
-
-                <td className="p-4">
-                  {invoice.paid}
-                </td>
-
-                <td className="p-4">
-
-                  {invoice.status === "Paid" && (
-                    <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs">
-                      Paid
-                    </span>
-                  )}
-
-                  {invoice.status === "Partial" && (
-                    <span className="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs">
-                      Partial
-                    </span>
-                  )}
-
-                  {invoice.status === "Unpaid" && (
-                    <span className="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-xs">
-                      Unpaid
-                    </span>
-                  )}
-
-                </td>
-
-                <td className="p-4">
-                  {invoice.date}
-                </td>
-
-                <td className="p-4">
-
-                  <div className="flex gap-2">
-
- <Link
-                      href="/dashboard/sales/invoices/details"
-                      className="bg-cyan-600 p-2 rounded-lg"
-                    >
-                    <Eye size={16} />
-                    </Link>
-                    {/* <button className="bg-cyan-600 p-2 rounded-lg">
-                      <Eye size={16} />
-                    </button> */}
-
-                    <button className="bg-green-600 p-2 rounded-lg">
-                      <Printer size={16} />
-                    </button>
-
-                    <button className="bg-orange-600 p-2 rounded-lg">
-                      <Download size={16} />
-                    </button>
-
-                  </div>
-
-                </td>
-
-              </tr>
-            ))}
-
-          </tbody>
-
-        </table>
-
+        <span
+          className={`text-xs px-3 py-1 rounded-full ${
+            invoice.status === "Paid"
+              ? "bg-green-500/20 text-green-400"
+              : invoice.status === "Partial"
+              ? "bg-yellow-500/20 text-yellow-400"
+              : "bg-red-500/20 text-red-400"
+          }`}
+        >
+          {invoice.status}
+        </span>
       </div>
 
+      <p className="text-slate-400 text-sm">{invoice.customer}</p>
+
+      <div className="flex justify-between mt-3 text-sm">
+        <span>Total: {invoice.total}</span>
+        <span>Paid: {invoice.paid}</span>
+      </div>
+
+      <div className="flex justify-between mt-3 text-xs text-slate-400">
+        <span>{invoice.date}</span>
+
+        <div className="flex gap-2">
+         <button
+  onClick={() => {
+
+    setViewOpen(true);
+  }}
+  className="bg-cyan-600 p-2 rounded-lg"
+>
+  <Eye size={16} />
+</button>
+
+          <button className="bg-green-600 p-2 rounded-lg">
+            <Printer size={14} />
+          </button>
+
+          <button className="bg-orange-600 p-2 rounded-lg">
+            <Download size={14} />
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+<InvoiceDetailsPage
+        open={viewOpen}
+        onClose={() => setViewOpen(false)}
+      />
+<CreateInvoicePage
+        open={createOpen}
+        onClose={() => setCreateOpen(false)}
+      />
     </div>
   );
 }

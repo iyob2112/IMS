@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import {
   FileText,
   CheckCircle,
@@ -39,7 +39,9 @@ export default function GrnPage() {
       date: "2026-06-06",
     },
   ];
-
+const [selectedGrn, setSelectedGrn] =
+  useState<Grn | null>(null);
+const [openView, setOpenView] = useState(false);
   return (
     <div className="min-h-screen bg-[#0B1120] text-white p-3 pt-10 space-y-6">
 
@@ -192,9 +194,15 @@ export default function GrnPage() {
                 <td className="p-4">
                   <div className="flex gap-2">
 
-                    <button className="bg-cyan-600 px-3 py-1 rounded-lg">
-                      View
-                    </button>
+    <button
+  onClick={() => {
+    setSelectedGrn(grn);
+    setOpenView(true);
+  }}
+  className="bg-cyan-600 px-3 py-1 rounded-lg"
+>
+  View
+</button>
 
                     <button className="bg-violet-600 px-3 py-1 rounded-lg">
                       Print
@@ -214,7 +222,176 @@ export default function GrnPage() {
         </table>
 
       </div>
+{openView && selectedGrn && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
 
+    <div className="bg-[#131C31] w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-800 p-6 relative">
+
+      <button
+        onClick={() => setOpenView(false)}
+        className="absolute top-4 right-4 text-slate-400 hover:text-white"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-3xl font-bold text-white">
+        Goods Received Note
+      </h2>
+
+      <p className="text-slate-400 mt-1 mb-6">
+        {selectedGrn.id}
+      </p>
+
+      {/* Summary */}
+      <div className="grid md:grid-cols-4 gap-4 mb-6">
+
+        <div className="bg-[#0B1120] p-4 rounded-2xl">
+          <p className="text-slate-500 text-sm">
+            Supplier
+          </p>
+          <h3 className="font-semibold mt-2">
+            {selectedGrn.supplier}
+          </h3>
+        </div>
+
+        <div className="bg-[#0B1120] p-4 rounded-2xl">
+          <p className="text-slate-500 text-sm">
+            Warehouse
+          </p>
+          <h3 className="font-semibold mt-2">
+            {selectedGrn.warehouse}
+          </h3>
+        </div>
+
+        <div className="bg-[#0B1120] p-4 rounded-2xl">
+          <p className="text-slate-500 text-sm">
+            Products
+          </p>
+          <h3 className="font-semibold mt-2">
+            {selectedGrn.products}
+          </h3>
+        </div>
+
+        <div className="bg-[#0B1120] p-4 rounded-2xl">
+          <p className="text-slate-500 text-sm">
+            Total Cost
+          </p>
+          <h3 className="font-semibold text-green-400 mt-2">
+            {selectedGrn.total}
+          </h3>
+        </div>
+
+      </div>
+
+      {/* Details */}
+      <div className="bg-[#0B1120] rounded-2xl p-6 border border-slate-800">
+
+        <h3 className="text-xl font-semibold mb-4">
+          GRN Information
+        </h3>
+
+        <div className="grid md:grid-cols-2 gap-4">
+
+          <div>
+            <p className="text-slate-500">
+              GRN Number
+            </p>
+            <p>{selectedGrn.id}</p>
+          </div>
+
+          <div>
+            <p className="text-slate-500">
+              Date
+            </p>
+            <p>{selectedGrn.date}</p>
+          </div>
+
+          <div>
+            <p className="text-slate-500">
+              Status
+            </p>
+
+            <span
+              className={`px-3 py-1 rounded-full text-xs ${
+                selectedGrn.status === "Approved"
+                  ? "bg-green-500/20 text-green-400"
+                  : selectedGrn.status === "Pending"
+                  ? "bg-yellow-500/20 text-yellow-400"
+                  : "bg-red-500/20 text-red-400"
+              }`}
+            >
+              {selectedGrn.status}
+            </span>
+          </div>
+
+          <div>
+            <p className="text-slate-500">
+              Warehouse
+            </p>
+            <p>{selectedGrn.warehouse}</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Products Table */}
+      <div className="mt-6 bg-[#0B1120] rounded-2xl p-6 border border-slate-800">
+
+        <h3 className="text-xl font-semibold mb-4">
+          Received Products
+        </h3>
+
+        <table className="w-full">
+
+          <thead>
+            <tr className="border-b border-slate-700">
+              <th className="text-left p-3">
+                Product
+              </th>
+              <th className="text-left p-3">
+                Qty
+              </th>
+              <th className="text-left p-3">
+                Cost
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td className="p-3">
+                Gaming Laptop
+              </td>
+              <td className="p-3">
+                12
+              </td>
+              <td className="p-3 text-green-400">
+                $8,500
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div className="flex gap-3 mt-6">
+
+        <button className="flex-1 bg-violet-600 p-3 rounded-xl">
+          Print GRN
+        </button>
+
+        <button className="flex-1 bg-green-600 p-3 rounded-xl">
+          Export PDF
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
     </div>
   );
 }

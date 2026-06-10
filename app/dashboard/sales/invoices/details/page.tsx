@@ -1,13 +1,24 @@
 "use client";
 
 import { Printer } from "lucide-react";
-
-export default function InvoiceDetailsPage() {
+interface Props {
+  open: boolean;
+  onClose: () => void;
+}
+export default function InvoiceDetailsPage({ open, onClose }: Props) {
+   if (!open) return null;
   return (
-    <div className="max-w-4xl mx-auto text-white h-full min-h-screen pt-10 p-3">
+   <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+<div className="bg-[#0B1120] w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-800 p-10 relative">
+       <button
+  onClick={onClose}
+  className="absolute top-4 right-4 text-slate-400 hover:text-white text-xl pb-10 "
+>
+  ✕
+</button>  
+
 
       <div className="bg-white text-black rounded-3xl p-10">
-
         <div className="flex justify-between">
 
           <div>
@@ -16,6 +27,7 @@ export default function InvoiceDetailsPage() {
             </h1>
 
             <p>INV-001</p>
+      
           </div>
 
           <div>
@@ -104,6 +116,7 @@ export default function InvoiceDetailsPage() {
         Print Invoice
       </button>
 
+    </div>
     </div>
   );
 }

@@ -6,7 +6,8 @@ export default async function SupplierDetails({
   const { id } = await params;
 
   return (
-    <div className="space-y-6 pt-10 p-3 text-white min-h-screen h-full ">
+ <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+<div className="bg-[#0B1120] w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-800 p-6 relative">
 
       <h1 className="text-4xl font-bold text-white">
         Supplier #{id}
@@ -36,6 +37,7 @@ export default async function SupplierDetails({
 
       </div>
 
+    </div>
     </div>
   );
 }

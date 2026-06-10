@@ -1,13 +1,22 @@
 "use client";
-
-export default function CreateInvoicePage() {
+interface Props {
+  open: boolean;
+  onClose: () => void;
+}
+export default function CreateInvoicePage({ open, onClose }: Props) {
+  if (!open) return null;
   return (
-    <div className="space-y-6 pt-10 p-3 text-white  h-full min-h-screen">
-
-      <h1 className="text-4xl font-bold text-white">
+   <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+<div className="bg-[#0B1120] w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-800 p-10 relative">
+      <h1 className="text-4xl font-bold text-white mb-6">
         Create Invoice
       </h1>
-
+    <button
+  onClick={onClose}
+  className="absolute top-4 right-4 text-slate-400 hover:text-white text-xl pb-10 "
+>
+  ✕
+</button>  
       <div className="bg-[#131C31] rounded-3xl border border-slate-800 p-6">
 
         <div className="grid md:grid-cols-2 gap-4">
@@ -78,6 +87,7 @@ export default function CreateInvoicePage() {
 
       </div>
 
+    </div>
     </div>
   );
 }

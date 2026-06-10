@@ -2,12 +2,16 @@
 
 import { InventoryItem } from "@/types/inventory";
 import { Eye, Pencil, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
   inventory: InventoryItem[];
 }
 
 export default function InventoryTable({ inventory }: Props) {
+  const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
+  const [openView, setOpenView] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   return (
     <div className="w-full">
 
@@ -64,13 +68,12 @@ export default function InventoryTable({ inventory }: Props) {
             {/* Status */}
             <div className="mt-3">
               <span
-                className={`px-3 py-1 rounded-full text-xs ${
-                  item.status === "In Stock"
+                className={`px-3 py-1 rounded-full text-xs ${item.status === "In Stock"
                     ? "bg-green-500/20 text-green-400"
                     : item.status === "Low Stock"
-                    ? "bg-yellow-500/20 text-yellow-400"
-                    : "bg-red-500/20 text-red-400"
-                }`}
+                      ? "bg-yellow-500/20 text-yellow-400"
+                      : "bg-red-500/20 text-red-400"
+                  }`}
               >
                 {item.status}
               </span>
@@ -79,11 +82,22 @@ export default function InventoryTable({ inventory }: Props) {
             {/* Actions */}
             <div className="flex gap-2 mt-4">
 
-              <button className="flex-1 bg-slate-800 p-2 rounded-lg">
+              <button
+                onClick={() => {
+                  setSelectedItem(item);
+                  setOpenView(true);
+                }}
+                className="p-2 bg-slate-800 rounded-lg"
+              >
                 <Eye size={16} />
               </button>
-
-              <button className="flex-1 bg-slate-800 p-2 rounded-lg">
+              <button
+                onClick={() => {
+                  setSelectedItem(item);
+                  setOpenEdit(true);
+                }}
+                className="p-2 bg-slate-800 rounded-lg"
+              >
                 <Pencil size={16} />
               </button>
 
@@ -144,13 +158,12 @@ export default function InventoryTable({ inventory }: Props) {
 
                 <td className="p-4">
                   <span
-                    className={`px-3 py-1 rounded-full text-xs ${
-                      item.status === "In Stock"
+                    className={`px-3 py-1 rounded-full text-xs ${item.status === "In Stock"
                         ? "bg-green-500/20 text-green-400"
                         : item.status === "Low Stock"
-                        ? "bg-yellow-500/20 text-yellow-400"
-                        : "bg-red-500/20 text-red-400"
-                    }`}
+                          ? "bg-yellow-500/20 text-yellow-400"
+                          : "bg-red-500/20 text-red-400"
+                      }`}
                   >
                     {item.status}
                   </span>
@@ -159,11 +172,22 @@ export default function InventoryTable({ inventory }: Props) {
                 <td className="p-4">
                   <div className="flex gap-2">
 
-                    <button className="p-2 bg-slate-800 rounded-lg">
+                    <button
+                      onClick={() => {
+                        setSelectedItem(item);
+                        setOpenView(true);
+                      }}
+                      className="p-2 bg-slate-800 rounded-lg"
+                    >
                       <Eye size={16} />
                     </button>
-
-                    <button className="p-2 bg-slate-800 rounded-lg">
+                    <button
+                      onClick={() => {
+                        setSelectedItem(item);
+                        setOpenEdit(true);
+                      }}
+                      className="p-2 bg-slate-800 rounded-lg"
+                    >
                       <Pencil size={16} />
                     </button>
 
@@ -181,7 +205,162 @@ export default function InventoryTable({ inventory }: Props) {
         </table>
 
       </div>
+{openView && selectedItem && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
 
+    <div className="bg-[#131C31] w-full max-w-2xl rounded-3xl p-6 relative">
+
+      <button
+        onClick={() => setOpenView(false)}
+        className="absolute top-4 right-4 text-slate-400"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-bold text-white mb-6">
+        Inventory Details
+      </h2>
+
+      <div className="grid gap-4 text-slate-300">
+
+        <p>
+          <span className="text-slate-500">Product:</span>{" "}
+          {selectedItem.product}
+        </p>
+
+        <p>
+          <span className="text-slate-500">SKU:</span>{" "}
+          {selectedItem.sku}
+        </p>
+
+        <p>
+          <span className="text-slate-500">Warehouse:</span>{" "}
+          {selectedItem.warehouse}
+        </p>
+
+        <p>
+          <span className="text-slate-500">Quantity:</span>{" "}
+          {selectedItem.quantity}
+        </p>
+
+        <p>
+          <span className="text-slate-500">Price:</span>{" "}
+          <span className="text-green-400">
+            ${selectedItem.price}
+          </span>
+        </p>
+
+        <p>
+          <span className="text-slate-500">Status:</span>{" "}
+          {selectedItem.status}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
+{openEdit && selectedItem && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+
+    <div className="bg-[#131C31] w-full max-w-2xl rounded-3xl p-6 relative">
+
+      <button
+        onClick={() => setOpenEdit(false)}
+        className="absolute top-4 right-4 text-slate-400"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-bold text-white mb-6">
+        Edit Inventory Item
+      </h2>
+
+      <div className="space-y-4">
+
+        <input
+          value={selectedItem.product}
+          onChange={(e) =>
+            setSelectedItem({
+              ...selectedItem,
+              product: e.target.value,
+            })
+          }
+          className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700 text-white"
+        />
+
+        <input
+          value={selectedItem.sku}
+          onChange={(e) =>
+            setSelectedItem({
+              ...selectedItem,
+              sku: e.target.value,
+            })
+          }
+          className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700 text-white"
+        />
+<div>
+  <label className="block text-sm text-slate-400 mb-2">
+    Warehouse
+  </label>
+
+  <select
+    value={selectedItem.warehouse}
+    onChange={(e) =>
+      setSelectedItem({
+        ...selectedItem,
+        warehouse: e.target.value,
+      })
+    }
+    className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700 text-white"
+  >
+    <option value="">Select Warehouse</option>
+    <option value="Main Warehouse">Main Warehouse</option>
+    <option value="Branch 1">Branch A</option>
+    <option value="Branch 2">Branch A</option>
+  </select>
+</div>
+
+        <input
+          type="number"
+          value={selectedItem.quantity}
+          onChange={(e) =>
+            setSelectedItem({
+              ...selectedItem,
+              quantity: Number(e.target.value),
+            })
+          }
+          className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700 text-white"
+        />
+
+        <div className="flex gap-3">
+
+          <button
+            onClick={() => {
+              console.log("Updated:", selectedItem);
+              setOpenEdit(false);
+            }}
+            className="flex-1 bg-indigo-600 p-3 rounded-xl text-white"
+          >
+            Save
+          </button>
+
+          <button
+            onClick={() => setOpenEdit(false)}
+            className="flex-1 bg-slate-800 p-3 rounded-xl text-white"
+          >
+            Cancel
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
     </div>
   );
 }

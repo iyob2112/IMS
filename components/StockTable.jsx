@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 const stockEntries = [
   {
@@ -28,6 +29,10 @@ const stockEntries = [
 ];
 
 export default function StockTable() {
+
+  const [selectedStock, setSelectedStock] = useState(null);
+  const [openView, setOpenView] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   return (
     <div className="w-full">
 
@@ -53,11 +58,10 @@ export default function StockTable() {
               </div>
 
               <span
-                className={`px-3 py-1 rounded-full text-xs ${
-                  item.status === "Completed"
-                    ? "bg-green-500/20 text-green-400"
-                    : "bg-yellow-500/20 text-yellow-400"
-                }`}
+                className={`px-3 py-1 rounded-full text-xs ${item.status === "Completed"
+                  ? "bg-green-500/20 text-green-400"
+                  : "bg-yellow-500/20 text-yellow-400"
+                  }`}
               >
                 {item.status}
               </span>
@@ -105,12 +109,23 @@ export default function StockTable() {
 
             {/* Actions */}
             <div className="flex gap-2 mt-4">
-
-              <button className="flex-1 bg-cyan-600 py-2 rounded-lg">
+              <button
+                onClick={() => {
+                  setSelectedStock(item);
+                  setOpenView(true);
+                }}
+                className="flex-1 bg-cyan-600 py-2 rounded-lg"
+              >
                 View
               </button>
 
-              <button className="flex-1 bg-indigo-600 py-2 rounded-lg">
+              <button
+                onClick={() => {
+                  setSelectedStock(item);
+                  setOpenEdit(true);
+                }}
+                className="flex-1 bg-indigo-600 py-2 rounded-lg"
+              >
                 Edit
               </button>
 
@@ -156,11 +171,10 @@ export default function StockTable() {
 
                 <td className="p-4">
                   <span
-                    className={`px-3 py-1 rounded-full text-xs ${
-                      item.status === "Completed"
-                        ? "bg-green-500/20 text-green-400"
-                        : "bg-yellow-500/20 text-yellow-400"
-                    }`}
+                    className={`px-3 py-1 rounded-full text-xs ${item.status === "Completed"
+                      ? "bg-green-500/20 text-green-400"
+                      : "bg-yellow-500/20 text-yellow-400"
+                      }`}
                   >
                     {item.status}
                   </span>
@@ -168,11 +182,23 @@ export default function StockTable() {
 
                 <td className="p-4">
                   <div className="flex gap-2">
-                    <button className="bg-cyan-600 px-3 py-1 rounded-lg">
+                    <button
+                      onClick={() => {
+                        setSelectedStock(item);
+                        setOpenView(true);
+                      }}
+                      className="bg-cyan-600 px-3 py-1 rounded-lg"
+                    >
                       View
                     </button>
 
-                    <button className="bg-indigo-600 px-3 py-1 rounded-lg">
+                    <button
+                      onClick={() => {
+                        setSelectedStock(item);
+                        setOpenEdit(true);
+                      }}
+                      className="bg-indigo-600 px-3 py-1 rounded-lg"
+                    >
                       Edit
                     </button>
                   </div>
@@ -185,7 +211,265 @@ export default function StockTable() {
         </table>
 
       </div>
+      {openView && selectedStock && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
 
+          <div className="bg-[#131C31] w-full max-w-3xl rounded-3xl p-6 relative">
+
+            <button
+              onClick={() => setOpenView(false)}
+              className="absolute top-4 right-4 text-slate-400"
+            >
+              ✕
+            </button>
+
+            <h2 className="text-2xl font-bold text-white mb-6">
+              Stock Receipt Details
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-4">
+
+              <div>
+                <p className="text-slate-500">GRN</p>
+                <p>{selectedStock.id}</p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Product</p>
+                <p>{selectedStock.product}</p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Supplier</p>
+                <p>{selectedStock.supplier}</p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Warehouse</p>
+                <p>{selectedStock.warehouse}</p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Quantity</p>
+                <p>{selectedStock.qty}</p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Unit Cost</p>
+                <p>{selectedStock.unitCost}</p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Total</p>
+                <p className="text-green-400">
+                  {selectedStock.total}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Received By</p>
+                <p>{selectedStock.receivedBy}</p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Date</p>
+                <p>{selectedStock.date}</p>
+              </div>
+
+              <div>
+                <p className="text-slate-500">Status</p>
+                <p>{selectedStock.status}</p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      )}
+  {openEdit && selectedStock && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+
+    <div className="bg-[#131C31] w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 relative">
+
+      <button
+        onClick={() => setOpenEdit(false)}
+        className="absolute top-4 right-4 text-slate-400 hover:text-white"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-bold text-white mb-2">
+        Edit Stock Receipt
+      </h2>
+
+      <p className="text-slate-400 mb-6">
+        GRN: {selectedStock.id}
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-4">
+
+        {/* Product */}
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Product
+          </label>
+          <input
+            value={selectedStock.product}
+           onChange={(e) =>
+    setSelectedHistory({
+      ...selectedStock,
+      product: e.target.value,
+    })
+  }
+            className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+          />
+        </div>
+
+        {/* Supplier */}
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Supplier
+          </label>
+          <select className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700">
+            <option>Tech Distributors</option>
+            <option>Global Electronics</option>
+          </select>
+        </div>
+
+        {/* Warehouse */}
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Warehouse
+          </label>
+          <select className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700">
+            <option>Main Warehouse</option>
+            <option>Warehouse A</option>
+            <option>Warehouse B</option>
+          </select>
+        </div>
+
+        {/* Quantity */}
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Quantity
+          </label>
+          <input
+            type="number"
+            value={selectedStock.qty}
+            onChange={(e) =>
+    setSelectedHistory({
+      ...selectedStock,
+      qty: e.target.value,
+    })
+  }
+            className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+          />
+        </div>
+
+        {/* Unit Cost */}
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Unit Cost
+          </label>
+          <input
+            value={selectedStock.unitCost}
+           onChange={(e) =>
+    setSelectedHistory({
+      ...selectedStock,
+      unitCost: e.target.value,
+    })
+  }
+            className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+          />
+        </div>
+
+        {/* Total */}
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Total Cost
+          </label>
+          <input
+            value={selectedStock.total}
+                    onChange={(e) =>
+    setSelectedHistory({
+      ...selectedStock,
+      total: e.target.value,
+    })
+  }
+            disabled
+            className="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-400"
+          />
+        </div>
+
+        {/* Received By */}
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Received By
+          </label>
+          <input
+            value={selectedStock.receivedBy}
+                    onChange={(e) =>
+    setSelectedHistory({
+      ...selectedStock,
+      receivedBy: e.target.value,
+    })
+  }
+            className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+          />
+        </div>
+
+        {/* Status */}
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Status
+          </label>
+          <select className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700">
+            <option>Completed</option>
+            <option>Pending</option>
+          </select>
+        </div>
+
+        {/* Notes */}
+        <div className="md:col-span-2">
+          <label className="block text-sm text-slate-400 mb-2">
+            Notes
+          </label>
+          <textarea
+            rows={4}
+            placeholder="Additional notes..."
+            className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+          />
+        </div>
+
+      </div>
+
+      {/* Buttons OUTSIDE the grid */}
+      <div className="flex gap-3 mt-6">
+
+        <button
+          onClick={() => {
+            console.log(selectedStock);
+            setOpenEdit(false);
+          }}
+          className="flex-1 bg-indigo-600 hover:bg-indigo-700 p-3 rounded-xl"
+        >
+          Save Changes
+        </button>
+
+        <button
+          onClick={() => setOpenEdit(false)}
+          className="flex-1 bg-slate-800 hover:bg-slate-700 p-3 rounded-xl"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
     </div>
   );
 }

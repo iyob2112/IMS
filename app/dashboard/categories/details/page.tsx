@@ -6,10 +6,15 @@ import {
   DollarSign,
   TrendingUp,
 } from "lucide-react";
-
-export default function CategoryDetailsPage() {
+interface Props {
+  open: boolean;
+  onClose: () => void;
+}
+export default function CategoryDetailsPage({ open, onClose }: Props) {
+    if (!open) return null;
   return (
-    <div className="space-y-6 pt-10 p-3 text-white h-full min-h-screen">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+<div className="bg-[#0B1120] w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-800 p-6 relative">
 
       <div>
         <h1 className="text-4xl font-bold text-white">
@@ -19,8 +24,13 @@ export default function CategoryDetailsPage() {
         <p className="text-slate-400 mt-2">
           Devices and gadgets
         </p>
+<button
+  onClick={onClose}
+  className="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"
+>
+  ✕
+</button> 
       </div>
-
       <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
 
         <div className="bg-[#131C31] p-6 rounded-3xl border border-slate-800">
@@ -65,7 +75,7 @@ export default function CategoryDetailsPage() {
 
       </div>
 
-      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6">
+      <div className="bg-[#131C31] border border-slate-800 rounded-3xl p-6 mt-6">
 
         <h2 className="text-2xl font-bold text-white mb-6">
           Products in Category
@@ -99,6 +109,7 @@ export default function CategoryDetailsPage() {
 
       </div>
 
+    </div>
     </div>
   );
 }

@@ -147,12 +147,12 @@ export default function StockInPage() {
         Batches
       </Link>
 
-      <Link
+      {/* <Link
         href="/dashboard/stock-in/barcodes"
         className="min-w-[140px] bg-pink-600 p-4 rounded-2xl text-center whitespace-nowrap"
       >
         Barcodes
-      </Link>
+      </Link> */}
 
       <button className="min-w-[140px] bg-indigo-600 p-4 rounded-2xl whitespace-nowrap">
         Import CSV

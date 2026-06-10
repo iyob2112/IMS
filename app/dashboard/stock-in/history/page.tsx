@@ -10,7 +10,7 @@ import {
   Calendar,
   User,
 } from "lucide-react";
-
+// import { StockHistoryItem } from "@/types/StockHistoryItem";
 export default function StockHistoryPage() {
   const [search, setSearch] = useState("");
 
@@ -55,7 +55,10 @@ export default function StockHistoryPage() {
       item.product.toLowerCase().includes(search.toLowerCase()) ||
       item.id.toLowerCase().includes(search.toLowerCase())
   );
-
+const [selectedHistory, setSelectedHistory] =
+  useState<StockHistoryItem | null>(null);
+const [openView, setOpenView] = useState(false);
+const [openEdit, setOpenEdit] = useState(false);
   return (
     <div className="min-h-screen bg-[#0B1120] text-white p-3 pt-10 space-y-6">
 
@@ -230,13 +233,29 @@ export default function StockHistoryPage() {
                 <td className="p-4">
                   <div className="flex gap-2">
 
-                    <button className="bg-cyan-600 px-3 py-1 rounded-lg">
-                      View
-                    </button>
+                   <button
+  onClick={() => {
+    setSelectedHistory(item);
+    setOpenView(true);
+  }}
+  className="bg-cyan-600 px-3 py-1 rounded-lg"
+>
+  View
+</button>
 
-                    <button className="bg-violet-600 px-3 py-1 rounded-lg">
-                      Print
-                    </button>
+<button
+  onClick={() => {
+    setSelectedHistory(item);
+    setOpenEdit(true);
+  }}
+  className="bg-indigo-600 px-3 py-1 rounded-lg"
+>
+  Edit
+</button>
+
+<button className="bg-violet-600 px-3 py-1 rounded-lg">
+  Print
+</button>
 
                   </div>
                 </td>
@@ -309,9 +328,25 @@ export default function StockHistoryPage() {
 
             <div className="flex gap-2 mt-4">
 
-              <button className="flex-1 bg-cyan-600 py-2 rounded-xl">
-                View
-              </button>
+          <button
+  onClick={() => {
+    setSelectedHistory(item);
+    setOpenView(true);
+  }}
+  className="flex-1 bg-cyan-600 py-2 rounded-xl"
+>
+  View
+</button>
+
+<button
+  onClick={() => {
+    setSelectedHistory(item);
+    setOpenEdit(true);
+  }}
+  className="flex-1 bg-indigo-600 py-2 rounded-xl"
+>
+  Edit
+</button>
 
               <button className="flex-1 bg-violet-600 py-2 rounded-xl">
                 Print
@@ -344,7 +379,172 @@ export default function StockHistoryPage() {
         </button>
 
       </div>
+{openView && selectedHistory && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
 
+    <div className="bg-[#131C31] w-full max-w-4xl rounded-3xl p-6 relative">
+
+      <button
+        onClick={() => setOpenView(false)}
+        className="absolute top-4 right-4"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-bold mb-6">
+        Stock History Details
+      </h2>
+
+      <div className="grid md:grid-cols-2 gap-6">
+
+        <div>
+          <p className="text-slate-400">Transaction ID</p>
+          <p>{selectedHistory.id}</p>
+        </div>
+
+        <div>
+          <p className="text-slate-400">Product</p>
+          <p>{selectedHistory.product}</p>
+        </div>
+
+        <div>
+          <p className="text-slate-400">Supplier</p>
+          <p>{selectedHistory.supplier}</p>
+        </div>
+
+        <div>
+          <p className="text-slate-400">Warehouse</p>
+          <p>{selectedHistory.warehouse}</p>
+        </div>
+
+        <div>
+          <p className="text-slate-400">Quantity</p>
+          <p>{selectedHistory.qty}</p>
+        </div>
+
+        <div>
+          <p className="text-slate-400">Cost</p>
+          <p className="text-green-400">
+            {selectedHistory.cost}
+          </p>
+        </div>
+
+        <div>
+          <p className="text-slate-400">Received By</p>
+          <p>{selectedHistory.receivedBy}</p>
+        </div>
+
+        <div>
+          <p className="text-slate-400">Date</p>
+          <p>{selectedHistory.date}</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
+{openEdit && selectedHistory && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+
+    <div className="bg-[#131C31] w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 relative">
+
+      <button
+        onClick={() => setOpenEdit(false)}
+        className="absolute top-4 right-4"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-bold mb-6">
+        Edit History Record
+      </h2>
+
+      <div className="grid md:grid-cols-2 gap-4">
+
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Product
+          </label>
+          <input
+  value={selectedHistory.product}
+  onChange={(e) =>
+    setSelectedHistory({
+      ...selectedHistory,
+      product: e.target.value,
+    })
+  }
+  className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+/>
+        </div>
+
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Supplier
+          </label>
+          <input
+            value={selectedHistory.supplier}
+            className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+            onChange={(e) =>
+    setSelectedHistory({
+      ...selectedHistory,
+      supplier: e.target.value,
+    })
+  }
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Warehouse
+          </label>
+          <select className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700">
+            <option>Main Warehouse</option>
+            <option>Branch Warehouse</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm text-slate-400 mb-2">
+            Quantity
+          </label>
+          <input
+            type="number"
+            value={selectedHistory.qty}
+            className="w-full p-3 rounded-xl bg-[#0B1120] border border-slate-700"
+            onChange={(e) =>
+    setSelectedHistory({
+      ...selectedHistory,
+      qty: Number(e.target.value),
+    })
+  }
+          />
+        </div>
+
+      </div>
+
+      <div className="flex gap-3 mt-6">
+
+        <button
+          className="flex-1 bg-indigo-600 p-3 rounded-xl"
+        >
+          Save Changes
+        </button>
+
+        <button
+          onClick={() => setOpenEdit(false)}
+          className="flex-1 bg-slate-800 p-3 rounded-xl"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
     </div>
   );
 }
