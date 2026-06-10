@@ -142,9 +142,9 @@ export default function CategoriesPage() {
             <option>Inactive</option>
           </select>
 
-          <button className="bg-green-600 px-5 rounded-xl">
+          {/* <button className="bg-green-600 px-5 rounded-xl">
             Export
-          </button>
+          </button> */}
 
         </div>
 

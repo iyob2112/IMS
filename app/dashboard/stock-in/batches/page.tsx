@@ -174,10 +174,10 @@ const [openEdit, setOpenEdit] = useState(false);
               <option>Expired</option>
             </select>
 
-            <button className="bg-cyan-600 px-5 rounded-xl flex items-center gap-2">
+            {/* <button className="bg-cyan-600 px-5 rounded-xl flex items-center gap-2">
               <Download size={18} />
               Export
-            </button>
+            </button> */}
 
           </div>
 

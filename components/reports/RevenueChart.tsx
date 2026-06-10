@@ -24,25 +24,25 @@ export default function RevenueChart() {
       </div>
 
       <div className="h-[300px] flex items-end gap-4">
+{revenueData.map((item) => (
+  <div
+    key={item.month}
+    className="flex-1 flex flex-col items-center h-full"
+  >
+    <div className="flex-1 w-full flex items-end">
+      <div
+        style={{
+          height: `${item.value}%`,
+        }}
+        className="w-full rounded-t-xl bg-gradient-to-t from-cyan-500 to-blue-500"
+      />
+    </div>
 
-        {revenueData.map((item) => (
-          <div
-            key={item.month}
-            className="flex-1 flex flex-col items-center"
-          >
-            <div
-              style={{
-                height: `${item.value}%`,
-              }}
-              className="w-full rounded-t-xl bg-gradient-to-t from-cyan-500 to-blue-500"
-            />
-
-            <span className="text-slate-400 text-xs mt-2">
-              {item.month}
-            </span>
-          </div>
-        ))}
-
+    <span className="text-slate-400 text-xs mt-2">
+      {item.month}
+    </span>
+  </div>
+))}
       </div>
 
     </div>

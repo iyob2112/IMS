@@ -134,10 +134,10 @@ const [openView, setOpenView] = useState(false);
               <option>Rejected</option>
             </select>
 
-            <button className="bg-cyan-600 px-5 rounded-xl flex items-center gap-2">
+            {/* <button className="bg-cyan-600 px-5 rounded-xl flex items-center gap-2">
               <Download size={18} />
               Export
-            </button>
+            </button> */}
 
           </div>
 

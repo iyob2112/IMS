@@ -154,9 +154,9 @@ export default function StockInPage() {
         Barcodes
       </Link> */}
 
-      <button className="min-w-[140px] bg-indigo-600 p-4 rounded-2xl whitespace-nowrap">
+      {/* <button className="min-w-[140px] bg-indigo-600 p-4 rounded-2xl whitespace-nowrap">
         Import CSV
-      </button>
+      </button> */}
 
     </div>
 

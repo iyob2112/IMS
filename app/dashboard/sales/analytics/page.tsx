@@ -9,7 +9,16 @@ import {
   Download,
   Calendar,
 } from "lucide-react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import RevenueChart from "@/components/reports/RevenueChart";
+import SalesGrowthChart from "@/components/reports/SalesGrowthChart";
 
 export default function SalesAnalyticsPage() {
   const [range, setRange] = useState<"daily" | "weekly" | "monthly">(
@@ -38,19 +47,19 @@ export default function SalesAnalyticsPage() {
 
         <div className="flex gap-3">
 
-          <button className="bg-[#131C31] px-4 py-3 rounded-xl border border-slate-700 h-14">
+          {/* <button className="bg-[#131C31] px-4 py-3 rounded-xl border border-slate-700 h-14">
             <Calendar size={18} />
-          </button>
+          </button> */}
 
-          <button className="bg-green-600 px-5 py-3 rounded-xl flex items-center gap-2 h-14">
+          {/* <button className="bg-green-600 px-5 py-3 rounded-xl flex items-center gap-2 h-14">
             <Download size={18} />
             Export Excel
-          </button>
+          </button> */}
 
-          <button className="bg-red-600 px-5 py-3 rounded-xl flex items-center gap-2 h-14">
+          {/* <button className="bg-red-600 px-5 py-3 rounded-xl flex items-center gap-2 h-14">
             <Download size={18} />
             Export PDF
-          </button>
+          </button> */}
 
         </div>
       </div>
@@ -142,9 +151,7 @@ export default function SalesAnalyticsPage() {
             Sales Growth ({range})
           </h2>
 
-          <div className="h-[350px] rounded-2xl bg-[#1A2742] flex items-center justify-center">
-            Growth Chart ({range})
-          </div>
+     <SalesGrowthChart />
         </div>
 
       </div>

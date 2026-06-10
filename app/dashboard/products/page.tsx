@@ -46,13 +46,13 @@ export default function ProductsPage() {
     <option>Out Of Stock</option>
   </select>
 
-  <button className="bg-green-600 px-5 rounded-xl">
+  {/* <button className="bg-green-600 px-5 rounded-xl">
     Export
   </button>
 
   <button className="bg-blue-600 px-5 rounded-xl">
     Import
-  </button>
+  </button> */}
 <Link
   href="/dashboard/products/analytics"
   className="bg-cyan-600 hover:bg-cyan-700 px-5 py-2 rounded-xl flex items-center justify-center "
