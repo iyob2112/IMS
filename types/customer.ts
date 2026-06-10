@@ -3,9 +3,9 @@ export interface customer {
   name: string;
   email: string;
   phone: string;
-  purchases: string;
+  purchases: string | number;
   due: string;
-  totalSpent:string;
+totalSpent?: string | number;
   delivery: "Delivery" | "Pending";
   status: "Active" | "Inactive";
 }

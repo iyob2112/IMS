@@ -1,6 +1,6 @@
-import { Customer } from "@/types/customer";
+import { customer } from "@/types/customer";
 
-export const customers: Customer[] = [
+export const customers: customer[] = [
   {
     id: 1,
     name: "John Doe",
@@ -8,6 +8,8 @@ export const customers: Customer[] = [
     phone: "+251912345678",
     purchases: 12,
     totalSpent: 12500,
+    delivery:"Delivery",
+    due:"",
     status: "Active",
   },
   {
@@ -17,6 +19,8 @@ export const customers: Customer[] = [
     phone: "+251911111111",
     purchases: 8,
     totalSpent: 8400,
+     delivery:"Delivery",
+    due:"",
     status: "Active",
   },
   {
@@ -24,6 +28,8 @@ export const customers: Customer[] = [
     name: "Michael Johnson",
     email: "michael@example.com",
     phone: "+251922222222",
+     delivery:"Delivery",
+    due:"",
     purchases: 4,
     totalSpent: 3500,
     status: "Inactive",
