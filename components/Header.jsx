@@ -12,6 +12,7 @@ import NotificationDropdown from "./NotificationDropdown";
 import GlobalSearch from "./GlobalSearch";
 
 export default function Header() {
+  const [openSearch, setOpenSearch] = useState(false);
   const { t } = useTranslation();
   const [openNotifications, setOpenNotifications] =
     useState(false);
@@ -51,8 +52,9 @@ export default function Header() {
           className="bg-transparent outline-none text-white ml-3 w-full"
         />
       </div> */}
-     <GlobalSearch />
-
+<div className="hidden md:block">
+  <GlobalSearch />
+</div>
       {/* RIGHT */}
       <div className="flex items-center gap-2 md:gap-4">
 
@@ -60,7 +62,12 @@ export default function Header() {
         <div className=" ">
           <LanguageSwitcher />
         </div>
-
+<button
+  onClick={() => setOpenSearch(true)}
+  className="md:hidden p-2 bg-[#0B1120] border border-slate-700 rounded-lg"
+>
+  <Search size={18} className="text-white" />
+</button>
         {/* Bell */}
         <div className="relative">
 
@@ -107,6 +114,23 @@ export default function Header() {
           <Menu size={18} className="text-white" />
         </button>
       </div>
+      {openSearch && (
+        <div className="fixed inset-0 z-50 bg-[#0B1120] p-4 flex flex-col">
+
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-white font-medium">Search</h2>
+
+            <button
+              onClick={() => setOpenSearch(false)}
+              className="text-slate-400"
+            >
+              ✕
+            </button>
+          </div>
+
+          <GlobalSearch mobileMode />
+        </div>
+      )}
     </header>
   );
 }
